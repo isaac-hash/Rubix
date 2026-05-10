@@ -1,0 +1,26 @@
+# Web framework
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+
+# Database
+sqlalchemy==2.0.30
+alembic==1.13.1
+psycopg2-binary==2.9.9      # PostgreSQL driver
+
+# Validation & config
+pydantic-settings==2.2.1
+
+# HTTP client (for calling Paystack, Korapay APIs)
+httpx==0.27.0
+
+# Background jobs
+celery[redis]==5.3.6
+redis==5.0.4
+
+# Auth
+passlib[bcrypt]==1.7.4       # Password hashing
+python-jose[cryptography]==3.3.0  # JWT tokens
+
+# Testing
+pytest==8.2.0
+pytest-asyncio==0.23.6

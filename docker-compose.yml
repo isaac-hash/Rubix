@@ -1,0 +1,93 @@
+# docker-compose.yml  (root of the monorepo)
+# ─────────────────────────────────────────────────────────────────────────────
+# Spins up the entire SubPay stack locally with one command:
+#   docker-compose up
+#
+# Services:
+#   api       → FastAPI backend (port 8000)
+#   celery    → Background job worker (same code, different command)
+#   postgres  → PostgreSQL database (port 5432)
+#   redis     → Redis broker for Celery + session cache (port 6379)
+#
+# Frontend services (payment-page, dashboard) will be added in Phase 2 & 4.
+# ─────────────────────────────────────────────────────────────────────────────
+
+services:
+
+  # ── FastAPI Backend ─────────────────────────────────────────────────────────
+  api:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/.env
+    environment:
+      # Override DATABASE_URL to use the docker service name instead of localhost
+      DATABASE_URL: postgresql+asyncpg://subpay:subpay@postgres:5432/subpay
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    volumes:
+      # Mount source code so changes reflect without rebuilding (dev only)
+      - ./backend:/app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  # ── Celery Worker ───────────────────────────────────────────────────────────
+  # Same Docker image as the API — just a different startup command.
+  # Handles background jobs: webhook delivery, renewal reminders, etc.
+  celery:
+    build: ./backend
+    env_file:
+      - ./backend/.env
+    environment:
+      DATABASE_URL: postgresql+asyncpg://subpay:subpay@postgres:5432/subpay
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      - redis
+      - postgres
+    volumes:
+      - ./backend:/app
+    command: celery -A app.workers.celery_app worker --loglevel=info
+
+  # ── Celery Beat (Scheduler) ─────────────────────────────────────────────────
+  # Triggers scheduled jobs (e.g. daily renewal check at 8am).
+  # Added in Phase 3 — commented out until then.
+  # celery-beat:
+  #   build: ./backend
+  #   env_file: ./backend/.env
+  #   environment:
+  #     DATABASE_URL: postgresql+asyncpg://subpay:subpay@postgres:5432/subpay
+  #     REDIS_URL: redis://redis:6379/0
+  #   depends_on: [redis, postgres]
+  #   volumes: [./backend:/app]
+  #   command: celery -A app.workers.celery_app beat --loglevel=info
+
+  # ── PostgreSQL ──────────────────────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: subpay
+      POSTGRES_USER: subpay
+      POSTGRES_PASSWORD: subpay
+    ports:
+      - "5432:5432"
+    volumes:
+      # Persist data between container restarts
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U subpay"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ── Redis ───────────────────────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+volumes:
+  postgres_data:
