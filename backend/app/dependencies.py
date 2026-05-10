@@ -60,13 +60,18 @@ async def get_current_merchant(
 
     raw_key = authorization.split(" ")[1]
 
-    # TODO: Uncomment once Merchant model exists (Phase 1, Step 2)
-    # from app.models.merchant import Merchant
-    # result = await db.execute(select(Merchant).where(Merchant.is_active == True))
-    # merchants = result.scalars().all()
-    # for m in merchants:
-    #     if verify_key(raw_key, m.secret_key_hash):
-    #         return m
+    # Scan active merchants and verify the key against each stored hash.
+    # Note: bcrypt verify is intentionally slow (that's the point).
+    # In production, you'd add a fast lookup index (e.g. first 8 chars of key)
+    # to avoid scanning the full merchants table on every request.
+    from app.models.merchant import Merchant
+    result = await db.execute(
+        select(Merchant).where(Merchant.is_active == True)
+    )
+    merchants = result.scalars().all()
+    for m in merchants:
+        if verify_key(raw_key, m.secret_key_hash):
+            return m
 
     raise HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
