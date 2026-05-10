@@ -1,0 +1,9 @@
+{
+  "pythonPath": "../venv/Scripts/python.exe",
+  "venvPath": "../venv",
+  "include": ["app", "alembic"],
+  "extraPaths": ["."],
+  "typeCheckingMode": "basic",
+  "reportMissingImports": "warning",
+  "reportMissingModuleSource": "none"
+}

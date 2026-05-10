@@ -61,13 +61,13 @@ async def health_check():
 
 
 # ── Routers ───────────────────────────────────────────────────────────────────
-from app.api import auth, customers
+from app.api import auth, customers, plans, subscriptions
 
-app.include_router(auth.router,      prefix="/v1", tags=["Auth"])
-app.include_router(customers.router, prefix="/v1", tags=["Customers"])
+app.include_router(auth.router,          prefix="/v1", tags=["Auth"])
+app.include_router(customers.router,     prefix="/v1", tags=["Customers"])
+app.include_router(plans.router,         prefix="/v1", tags=["Plans"])
+app.include_router(subscriptions.router, prefix="/v1", tags=["Subscriptions"])
 
 # Add more routers here as you build them:
-# from app.api import plans, subscriptions, webhooks
-# app.include_router(plans.router,         prefix="/v1", tags=["Plans"])
-# app.include_router(subscriptions.router, prefix="/v1", tags=["Subscriptions"])
-# app.include_router(webhooks.router,      prefix="",    tags=["Webhooks"])
+# from app.api import webhooks
+# app.include_router(webhooks.router, prefix="", tags=["Webhooks"])
