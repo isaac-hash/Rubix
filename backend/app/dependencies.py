@@ -23,21 +23,17 @@
 from fastapi import Depends, Header, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
-from passlib.context import CryptContext
-
+import hashlib
 from app.database import get_db
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
-
 def hash_key(raw_key: str) -> str:
-    """Hash an API key for safe storage. Never store raw keys."""
-    return pwd_context.hash(raw_key)
+    """Hash an API key for safe storage."""
+    return hashlib.sha256(raw_key.encode()).hexdigest()
 
 
 def verify_key(raw_key: str, hashed: str) -> bool:
     """Check a raw API key against its stored hash."""
-    return pwd_context.verify(raw_key, hashed)
+    return hashlib.sha256(raw_key.encode()).hexdigest() == hashed
 
 
 async def get_current_merchant(

@@ -44,6 +44,8 @@ from app.models.virtual_account import VirtualAccount
 from app.models.payment import Payment, PaymentType
 from app.models.webhook_delivery import WebhookDelivery, DeliveryStatus
 from app.models.plan import Plan, PlanInterval
+from app.workers.tasks import deliver_merchant_webhook
+from app.models.merchant import Merchant
 
 router = APIRouter()
 
@@ -84,8 +86,7 @@ async def _dispatch_merchant_webhook(
     We insert the DB record FIRST — that way there's always an audit trail
     even if the task queue crashes.
     """
-    from app.models.merchant import Merchant
-    from app.workers.tasks import deliver_merchant_webhook
+    
 
     merchant = await db.get(Merchant, subscription.merchant_id)
     if not merchant or not merchant.webhook_url:

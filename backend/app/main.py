@@ -50,6 +50,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# ── Root ──────────────────────────────────────────────────────────────────────
+
+@app.get("/")
+async def root():
+    return {"message": "Welcome to the SubPay API"}
+
 
 # ── Health Check ─────────────────────────────────────────────────────────────
 # Railway and Render ping this to confirm the app is alive.

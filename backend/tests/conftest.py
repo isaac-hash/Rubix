@@ -17,6 +17,7 @@
 # ─────────────────────────────────────────────────────────────────────────────
 
 import asyncio
+import sys
 import hmac
 import hashlib
 import json
@@ -31,15 +32,31 @@ from app.database import Base, get_db
 from app.config import settings
 
 # ── Test database ─────────────────────────────────────────────────────────────
-# Use a separate DB so tests never touch your dev data
-TEST_DATABASE_URL = settings.DATABASE_URL.replace("/subpay", "/subpay_test")
+# Use a separate DB so tests never touch your dev data.
+# We only replace the last occurrence of the DB name to avoid breaking the credentials.
+TEST_DATABASE_URL = settings.DATABASE_URL.rsplit("/", 1)[0] + "/subpay_test"
 
-test_engine = create_async_engine(TEST_DATABASE_URL, echo=False)
+
+from sqlalchemy.pool import NullPool
+
+test_engine = create_async_engine(TEST_DATABASE_URL, echo=False, poolclass=NullPool)
 TestSession = async_sessionmaker(test_engine, expire_on_commit=False)
 
 
+@pytest.fixture(scope="session")
+def event_loop():
+    """
+    Force a single event loop for the entire test session.
+    On Windows, we use SelectorEventLoop to avoid Proactor bugs.
+    """
+    if sys.platform == "win32":
+        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+    
+    loop = asyncio.get_event_loop_policy().new_event_loop()
+    yield loop
+    loop.close()
 @pytest_asyncio.fixture(scope="session", autouse=True)
-async def create_tables():
+async def create_tables(event_loop):
     """Create all tables once per test session, drop them at the end."""
     async with test_engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
@@ -51,30 +68,37 @@ async def create_tables():
 @pytest_asyncio.fixture()
 async def db():
     """
-    Provide a DB session per test that rolls back after the test.
-    This keeps tests isolated — one test's data doesn't leak into another.
+    Provide a DB session per test that is TIED to a transaction.
+    We start a transaction, yield the session, and ALWAYS roll back.
+    This is the gold standard for fast, isolated DB tests.
     """
-    async with TestSession() as session:
-        yield session
-        await session.rollback()
+    async with test_engine.connect() as connection:
+        transaction = await connection.begin()
+        async with TestSession(bind=connection) as session:
+            yield session
+            await session.close()
+        
+        await transaction.rollback()
+
 
 
 @pytest_asyncio.fixture()
 async def client(db):
     """
-    HTTP test client with the test DB session injected.
-    Override get_db so every request uses the rollback-safe session.
+    HTTP test client.
+    We override the app's get_db to use the SAME session as the 'db' fixture.
+    Because they share a transaction, the app sees what the test created.
     """
     async def override_get_db():
         yield db
 
     app.dependency_overrides[get_db] = override_get_db
-
+    
     async with AsyncClient(
         transport=ASGITransport(app=app), base_url="http://test"
     ) as ac:
         yield ac
-
+    
     app.dependency_overrides.clear()
 
 
