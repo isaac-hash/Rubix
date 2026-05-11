@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Payment Successful - Rubix</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "inverse-primary": "#006c49",
+                "tertiary-fixed-dim": "#b7c8e1",
+                "surface": "#101415",
+                "on-primary-container": "#00422b",
+                "primary-container": "#10b981",
+                "on-error": "#690005",
+                "surface-variant": "#313536",
+                "outline": "#86948a",
+                "on-background": "#e0e3e4",
+                "surface-dim": "#101415",
+                "on-tertiary": "#213145",
+                "on-secondary-container": "#83c2a9",
+                "surface-container": "#1c2021",
+                "outline-variant": "#3c4a42",
+                "surface-container-lowest": "#0b0f10",
+                "inverse-on-surface": "#2d3132",
+                "surface-tint": "#4edea3",
+                "tertiary": "#b7c8e1",
+                "on-secondary": "#003829",
+                "on-surface": "#e0e3e4",
+                "surface-bright": "#363a3b",
+                "on-tertiary-fixed": "#0b1c30",
+                "on-primary-fixed": "#002113",
+                "on-surface-variant": "#bbcabf",
+                "primary": "#4edea3",
+                "tertiary-fixed": "#d3e4fe",
+                "primary-fixed": "#6ffbbe",
+                "on-secondary-fixed": "#002117",
+                "on-error-container": "#ffdad6",
+                "error-container": "#93000a",
+                "secondary-fixed-dim": "#95d3ba",
+                "on-tertiary-container": "#2a3a4f",
+                "on-primary-fixed-variant": "#005236",
+                "surface-container-highest": "#313536",
+                "primary-fixed-dim": "#4edea3",
+                "on-tertiary-fixed-variant": "#38485d",
+                "error": "#ffb4ab",
+                "tertiary-container": "#94a4bd",
+                "on-primary": "#003824",
+                "secondary-container": "#0b513d",
+                "surface-container-low": "#181c1d",
+                "secondary-fixed": "#b0f0d6",
+                "inverse-surface": "#e0e3e4",
+                "background": "#101415",
+                "surface-container-high": "#272b2c",
+                "secondary": "#95d3ba",
+                "on-secondary-fixed-variant": "#0b513d"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+        },
+        "spacing": {
+                "xs": "4px",
+                "xl": "32px",
+                "gutter": "16px",
+                "md": "16px",
+                "lg": "24px",
+                "container-margin": "24px",
+                "unit": "4px",
+                "sm": "8px"
+        },
+        "fontFamily": {
+                "headline-sm": [
+                        "Hanken Grotesk"
+                ],
+                "body-md": [
+                        "Hanken Grotesk"
+                ],
+                "body-lg": [
+                        "Hanken Grotesk"
+                ],
+                "body-sm": [
+                        "Hanken Grotesk"
+                ],
+                "label-sm": [
+                        "Hanken Grotesk"
+                ],
+                "headline-md": [
+                        "Hanken Grotesk"
+                ],
+                "headline-lg-mobile": [
+                        "Hanken Grotesk"
+                ],
+                "headline-lg": [
+                        "Hanken Grotesk"
+                ],
+                "label-md": [
+                        "Hanken Grotesk"
+                ],
+                "display-lg": [
+                        "Hanken Grotesk"
+                ]
+        },
+        "fontSize": {
+                "headline-sm": [
+                        "20px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "500"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "body-sm": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-sm": [
+                        "10px",
+                        {
+                                "lineHeight": "14px",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "28px",
+                        {
+                                "lineHeight": "36px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "label-md": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "display-lg": [
+                        "48px",
+                        {
+                                "lineHeight": "56px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col items-center justify-center p-gutter">
+<main class="w-full max-w-[480px] bg-surface-container-lowest rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/20 overflow-hidden flex flex-col">
+<!-- Header / Success Indicator -->
+<div class="px-gutter pt-lg pb-md flex flex-col items-center text-center bg-surface-container-low border-b border-outline-variant/20 relative overflow-hidden">
+<!-- Subtle background shape -->
+<div class="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none"></div>
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-md relative z-10">
+<span class="material-symbols-outlined text-[32px] text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h1 class="font-headline-md text-headline-md text-on-surface mb-sm relative z-10">Payment Successful</h1>
+<p class="font-body-md text-body-md text-on-surface-variant relative z-10">Your subscription to <strong>Musicbox Premium</strong> is now active.</p>
+</div>
+<!-- Subscription Details -->
+<div class="p-gutter border-b border-outline-variant/20">
+<div class="flex justify-between items-center py-sm">
+<span class="font-body-md text-body-md text-on-surface-variant">Amount Paid</span>
+<span class="font-headline-md text-headline-md text-on-surface">$9.99</span>
+</div>
+<div class="flex justify-between items-center py-sm">
+<span class="font-body-md text-body-md text-on-surface-variant">Next Renewal</span>
+<span class="font-body-md text-body-md text-on-surface font-semibold">Nov 24, 2024</span>
+</div>
+<div class="flex justify-between items-center py-sm">
+<span class="font-body-md text-body-md text-on-surface-variant">Payment Method</span>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline">credit_card</span>
+<span class="font-label-md text-label-md text-on-surface">•••• 4242</span>
+</div>
+</div>
+</div>
+<!-- Claim Account Prompt -->
+<div class="p-gutter bg-surface">
+<div class="mb-md">
+<h2 class="font-headline-md text-[20px] leading-[1.4] font-semibold text-on-surface mb-sm">Claim your account</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Want to track this and all future subscriptions in one place? Create your Rubix Consumer account — your details are already saved.</p>
+</div>
+<form class="space-y-md flex flex-col">
+<div class="flex flex-col gap-unit">
+<label class="font-label-md text-label-md text-on-surface" for="password">Create a Password</label>
+<input class="w-full px-4 py-3 rounded-DEFAULT border border-outline-variant bg-surface-container-lowest text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all shadow-sm" id="password" placeholder="••••••••" type="password"/>
+</div>
+<div class="flex flex-col gap-sm pt-sm">
+<button class="w-full py-3 px-4 bg-primary text-on-primary font-body-md text-body-md font-semibold rounded-lg shadow-sm hover:opacity-90 transition-opacity flex justify-center items-center gap-2 bg-gradient-to-b from-white/10 to-transparent" type="button">
+                        Go to my Dashboard
+                        <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+<button class="w-full py-3 px-4 bg-transparent text-primary font-body-md text-body-md rounded-lg hover:bg-surface-container-high transition-colors" type="button">
+                        Skip for now
+                    </button>
+</div>
+</form>
+</div>
+</main>
+<!-- Footer Component Execution -->
+<footer class="w-full py-lg px-gutter flex flex-col md:flex-row justify-between items-center mt-auto max-w-[1280px] mx-auto opacity-70">
+<div class="font-label-md text-label-md text-on-surface-variant mb-sm md:mb-0">
+            © 2024 Rubix Africa. Secure infrastructure for modern payments.
+        </div>
+<nav class="flex gap-gutter">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Terms</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Privacy</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">API Docs</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Status</a>
+</nav>
+</footer>
+</body></html>

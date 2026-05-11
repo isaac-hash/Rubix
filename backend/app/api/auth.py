@@ -22,8 +22,8 @@ from sqlalchemy import select
 
 from app.database import get_db
 from app.models.merchant import Merchant
-from app.schemas.merchant import MerchantSignup, MerchantResponse, MerchantSignupResponse
-from app.dependencies import hash_key
+from app.schemas.merchant import MerchantSignup, MerchantResponse, MerchantSignupResponse, MerchantLogin
+from app.dependencies import hash_key, hash_password, verify_password
 
 router = APIRouter()
 
@@ -58,13 +58,15 @@ async def merchant_signup(
 
     # 2. Generate API key + hash it
     raw_key = generate_api_key()
-    hashed = hash_key(raw_key)
+    hashed_key = hash_key(raw_key)
+    hashed_password = hash_password(body.password)
 
     # 3. Create merchant record
     merchant = Merchant(
         name=body.name,
         email=body.email,
-        secret_key_hash=hashed,
+        secret_key_hash=hashed_key,
+        password_hash=hashed_password,
     )
     db.add(merchant)
     await db.commit()
@@ -75,3 +77,48 @@ async def merchant_signup(
         merchant=MerchantResponse.model_validate(merchant),
         api_key=raw_key,
     )
+
+
+@router.post("/auth/login")
+async def merchant_login(
+    body: MerchantLogin,
+    db: AsyncSession = Depends(get_db),
+):
+    # 1. Find merchant by email
+    merchant = await db.scalar(
+        select(Merchant).where(Merchant.email == body.email)
+    )
+    if not merchant or not merchant.password_hash:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid email or password",
+        )
+
+    # 2. Verify password
+    if not verify_password(body.password, merchant.password_hash):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid email or password",
+        )
+
+    # 3. Generate a JWT for the dashboard session
+    from datetime import datetime, timedelta, timezone
+    from jose import jwt
+    
+    # In production, these would be in your .env
+    SECRET_KEY = "rubix_super_secret_session_key"
+    ALGORITHM = "HS256"
+    access_token_expires = timedelta(hours=24)
+    
+    expire = datetime.now(timezone.utc) + access_token_expires
+    to_encode = {"sub": str(merchant.id), "exp": expire}
+    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+
+    return {
+        "message": "Login successful",
+        "access_token": encoded_jwt,
+        "token_type": "bearer",
+        "merchant": MerchantResponse.model_validate(merchant)
+    }
+
+

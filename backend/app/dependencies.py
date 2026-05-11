@@ -26,6 +26,10 @@ from sqlalchemy import select
 import hashlib
 from app.database import get_db
 
+from passlib.context import CryptContext
+
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
 def hash_key(raw_key: str) -> str:
     """Hash an API key for safe storage."""
     return hashlib.sha256(raw_key.encode()).hexdigest()
@@ -36,40 +40,61 @@ def verify_key(raw_key: str, hashed: str) -> bool:
     return hashlib.sha256(raw_key.encode()).hexdigest() == hashed
 
 
+def hash_password(password: str) -> str:
+    """Hash a plaintext password."""
+    return pwd_context.hash(password)
+
+
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+    """Check a plaintext password against its stored hash."""
+    return pwd_context.verify(plain_password, hashed_password)
+
+
+
 async def get_current_merchant(
     authorization: str = Header(...),
     db: AsyncSession = Depends(get_db),
 ):
     """
-    Extract + validate the merchant's Bearer API key.
-    Raises 401 if missing, malformed, or invalid.
-    
-    Usage in a route:
-        async def create_customer(merchant = Depends(get_current_merchant)):
-            ...
+    Extract + validate the merchant's Bearer credential.
+    Supports either a Raw API Key or a JWT Session Token.
     """
     if not authorization.startswith("Bearer "):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Authorization header must be: Bearer <api_key>",
+            detail="Authorization header must be: Bearer <token>",
         )
 
-    raw_key = authorization.split(" ")[1]
+    token = authorization.split(" ")[1]
 
-    # Scan active merchants and verify the key against each stored hash.
-    # Note: bcrypt verify is intentionally slow (that's the point).
-    # In production, you'd add a fast lookup index (e.g. first 8 chars of key)
-    # to avoid scanning the full merchants table on every request.
+    # 1. Try treating it as a JWT (Dashboard Session)
+    from jose import jwt, JWTError
+    SECRET_KEY = "rubix_super_secret_session_key"
+    ALGORITHM = "HS256"
+    
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        merchant_id = payload.get("sub")
+        if merchant_id:
+            from app.models.merchant import Merchant
+            merchant = await db.get(Merchant, merchant_id)
+            if merchant and merchant.is_active:
+                return merchant
+    except JWTError:
+        pass # Not a valid JWT, try API Key instead
+
+    # 2. Try treating it as a Raw API Key (Server-to-Server)
     from app.models.merchant import Merchant
     result = await db.execute(
         select(Merchant).where(Merchant.is_active == True)
     )
     merchants = result.scalars().all()
     for m in merchants:
-        if verify_key(raw_key, m.secret_key_hash):
+        if verify_key(token, m.secret_key_hash):
             return m
 
     raise HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Invalid API key",
+        detail="Invalid authentication credential",
     )
+

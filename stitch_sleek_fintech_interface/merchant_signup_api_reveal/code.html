@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rubix - Merchant Signup</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Hanken Grotesk -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed-variant": "#38485d",
+                    "on-secondary-fixed": "#002117",
+                    "surface-container-high": "#272b2c",
+                    "on-primary-fixed-variant": "#005236",
+                    "primary-fixed-dim": "#4edea3",
+                    "on-secondary": "#003829",
+                    "on-background": "#e0e3e4",
+                    "on-secondary-container": "#83c2a9",
+                    "error-container": "#93000a",
+                    "on-tertiary-fixed": "#0b1c30",
+                    "on-primary-fixed": "#002113",
+                    "outline": "#86948a",
+                    "on-error-container": "#ffdad6",
+                    "surface-tint": "#4edea3",
+                    "primary-container": "#10b981",
+                    "inverse-primary": "#006c49",
+                    "surface-container-lowest": "#0b0f10",
+                    "surface-dim": "#101415",
+                    "on-surface": "#e0e3e4",
+                    "surface-container-low": "#181c1d",
+                    "inverse-on-surface": "#2d3132",
+                    "error": "#ffb4ab",
+                    "primary-fixed": "#6ffbbe",
+                    "on-tertiary": "#213145",
+                    "surface-container-highest": "#313536",
+                    "tertiary": "#b7c8e1",
+                    "secondary-fixed-dim": "#95d3ba",
+                    "on-error": "#690005",
+                    "inverse-surface": "#e0e3e4",
+                    "on-tertiary-container": "#2a3a4f",
+                    "primary": "#4edea3",
+                    "secondary": "#95d3ba",
+                    "secondary-container": "#0b513d",
+                    "tertiary-container": "#94a4bd",
+                    "surface": "#101415",
+                    "on-primary-container": "#00422b",
+                    "surface-container": "#1c2021",
+                    "on-surface-variant": "#bbcabf",
+                    "tertiary-fixed": "#d3e4fe",
+                    "on-secondary-fixed-variant": "#0b513d",
+                    "surface-bright": "#363a3b",
+                    "tertiary-fixed-dim": "#b7c8e1",
+                    "secondary-fixed": "#b0f0d6",
+                    "surface-variant": "#313536",
+                    "outline-variant": "#3c4a42",
+                    "background": "#101415",
+                    "on-primary": "#003824"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "container-margin": "24px",
+                    "xs": "4px",
+                    "xl": "32px",
+                    "lg": "24px",
+                    "gutter": "16px",
+                    "unit": "4px",
+                    "sm": "8px"
+            },
+            "fontFamily": {
+                    "body-sm": [
+                            "Hanken Grotesk"
+                    ],
+                    "label-sm": [
+                            "Hanken Grotesk"
+                    ],
+                    "label-md": [
+                            "Hanken Grotesk"
+                    ],
+                    "headline-lg-mobile": [
+                            "Hanken Grotesk"
+                    ],
+                    "body-lg": [
+                            "Hanken Grotesk"
+                    ],
+                    "headline-md": [
+                            "Hanken Grotesk"
+                    ],
+                    "body-md": [
+                            "Hanken Grotesk"
+                    ],
+                    "headline-sm": [
+                            "Hanken Grotesk"
+                    ],
+                    "display-lg": [
+                            "Hanken Grotesk"
+                    ],
+                    "headline-lg": [
+                            "Hanken Grotesk"
+                    ]
+            },
+            "fontSize": {
+                    "body-sm": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "label-sm": [
+                            "10px",
+                            {
+                                    "lineHeight": "14px",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "label-md": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-lg-mobile": [
+                            "28px",
+                            {
+                                    "lineHeight": "36px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-md": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-sm": [
+                            "20px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "display-lg": [
+                            "48px",
+                            {
+                                    "lineHeight": "56px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "letterSpacing": "-0.01em",
+                                    "fontWeight": "600"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+<style>
+        /* Custom Utility for Material Symbols specific to this system */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .symbol-filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface min-h-screen flex items-center justify-center p-gutter md:p-container-margin antialiased">
+<!-- Main Auth Canvas - Bento Style Layout -->
+<main class="w-full max-w-[1100px] grid grid-cols-1 lg:grid-cols-12 gap-0 bg-surface border border-outline-variant rounded-xl overflow-hidden shadow-2xl shadow-black/80">
+<!-- Left Pane: Provisioned Account Details -->
+<section class="lg:col-span-5 p-xl bg-surface-container-low/30 border-b lg:border-b-0 lg:border-r border-outline-variant flex flex-col justify-between relative">
+<!-- Branding -->
+<div class="mb-xl">
+<div class="flex items-center gap-sm mb-lg">
+<span class="material-symbols-outlined symbol-filled text-primary" style="font-size: 32px;">deployed_code</span>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Rubix</h1>
+</div>
+<div class="flex items-center gap-sm mt-md">
+<span class="material-symbols-outlined symbol-filled text-primary text-body-lg">check_circle</span>
+<h2 class="font-headline-sm text-headline-sm text-primary">Infrastructure Provisioned</h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-sm">
+                    Your merchant account has been created and securely anchored to the Rubix ledger.
+                </p>
+</div>
+<!-- Read-Only Form Fields (Simulating completed step) -->
+<div class="space-y-md flex-grow">
+<div class="space-y-xs">
+<label class="font-label-md text-label-md text-on-surface-variant uppercase">Business Entity</label>
+<div class="flex items-center justify-between w-full px-md py-sm bg-surface-container-highest border border-outline-variant/50 rounded-DEFAULT">
+<span class="font-body-md text-body-md text-on-surface">Acme Global Financial Ltd.</span>
+<span class="material-symbols-outlined text-outline text-body-md">lock</span>
+</div>
+</div>
+<div class="space-y-xs">
+<label class="font-label-md text-label-md text-on-surface-variant uppercase">Administrator Email</label>
+<div class="flex items-center justify-between w-full px-md py-sm bg-surface-container-highest border border-outline-variant/50 rounded-DEFAULT">
+<span class="font-body-md text-body-md text-on-surface">admin@acmeglobal.io</span>
+<span class="material-symbols-outlined text-outline text-body-md">lock</span>
+</div>
+</div>
+<div class="space-y-xs">
+<label class="font-label-md text-label-md text-on-surface-variant uppercase">Authentication Credential</label>
+<div class="flex items-center justify-between w-full px-md py-sm bg-surface-container-highest border border-outline-variant/50 rounded-DEFAULT">
+<span class="font-body-md text-body-md text-on-surface tracking-widest mt-1">••••••••••••••••</span>
+<span class="material-symbols-outlined text-outline text-body-md">lock</span>
+</div>
+</div>
+</div>
+<div class="mt-xl pt-lg border-t border-outline-variant/30">
+<div class="flex items-center gap-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-body-md">shield</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider">End-to-End Encrypted Handshake</span>
+</div>
+</div>
+</section>
+<!-- Right Pane: Secret API Key Reveal -->
+<section class="lg:col-span-7 p-xl bg-surface relative flex flex-col justify-center">
+<!-- Subtle background accent -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="relative z-10">
+<div class="mb-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Secret API Key Reveal</h3>
+<p class="font-body-sm text-body-sm text-error bg-error-container/10 border border-error/20 rounded-DEFAULT p-sm inline-flex items-center gap-unit mt-sm">
+<span class="material-symbols-outlined text-body-sm">warning</span>
+                        Copy your LIVE key immediately. It will not be shown again.
+                    </p>
+</div>
+<!-- Live Key Block (Emerald Accent) -->
+<div class="mb-md group">
+<div class="flex items-center justify-between mb-sm">
+<div class="flex items-center gap-unit">
+<span class="bg-primary/20 text-primary border border-primary/30 font-label-sm text-label-sm px-2 py-0.5 rounded-sm uppercase tracking-wider">Live Environment</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">sk_live_...</span>
+</div>
+</div>
+<div class="relative bg-surface-container-lowest border border-primary rounded-lg p-md overflow-hidden transition-all duration-300 shadow-[0_0_15px_rgba(78,222,163,0.1)]">
+<!-- Simulated Masking overlay -->
+<div class="absolute inset-0 bg-surface-container-lowest/80 backdrop-blur-sm flex items-center justify-center opacity-0 transition-opacity duration-300 z-10 pointer-events-none"></div>
+<div class="flex items-center justify-between gap-md relative z-20">
+<code class="font-body-md text-body-md text-primary break-all select-all font-mono tracking-wider">
+                                rbx_live_sk_7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a
+                            </code>
+<button class="shrink-0 w-10 h-10 flex items-center justify-center rounded-DEFAULT bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 transition-colors" title="Copy Live Key">
+<span class="material-symbols-outlined">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Test Key Block (Standard Slate Accent) -->
+<div class="mb-xl">
+<div class="flex items-center justify-between mb-sm">
+<div class="flex items-center gap-unit">
+<span class="bg-surface-variant text-on-surface-variant border border-outline-variant font-label-sm text-label-sm px-2 py-0.5 rounded-sm uppercase tracking-wider">Test Environment</span>
+<span class="font-label-sm text-label-sm text-outline">sk_test_...</span>
+</div>
+</div>
+<div class="relative bg-surface-container-low border border-outline-variant rounded-lg p-md">
+<div class="flex items-center justify-between gap-md">
+<code class="font-body-md text-body-md text-on-surface-variant break-all select-all font-mono tracking-wider">
+                                rbx_test_sk_1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b
+                            </code>
+<button class="shrink-0 w-10 h-10 flex items-center justify-center rounded-DEFAULT bg-surface-variant hover:bg-surface-bright text-on-surface border border-outline-variant transition-colors" title="Copy Test Key">
+<span class="material-symbols-outlined">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Final Action -->
+<div class="flex flex-col sm:flex-row gap-md mt-lg pt-lg border-t border-outline-variant/30">
+<button class="w-full sm:w-auto flex-1 bg-primary text-on-primary font-label-md text-label-md uppercase tracking-wider px-lg py-3 rounded-DEFAULT hover:bg-primary-fixed-dim transition-colors flex items-center justify-center gap-sm">
+<span>Access Developer Dashboard</span>
+<span class="material-symbols-outlined text-body-md">arrow_forward</span>
+</button>
+<button class="w-full sm:w-auto px-lg py-3 rounded-DEFAULT border border-outline-variant text-primary font-label-md text-label-md uppercase tracking-wider hover:bg-surface-container-high transition-colors flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined text-body-md">description</span>
+<span>Read API Docs</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+</body></html>

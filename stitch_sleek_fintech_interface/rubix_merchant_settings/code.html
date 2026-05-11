@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Settings - Merchant Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "inverse-primary": "#006c49",
+                "tertiary-fixed-dim": "#b7c8e1",
+                "surface": "#101415",
+                "on-primary-container": "#00422b",
+                "primary-container": "#10b981",
+                "on-error": "#690005",
+                "surface-variant": "#313536",
+                "outline": "#86948a",
+                "on-background": "#e0e3e4",
+                "surface-dim": "#101415",
+                "on-tertiary": "#213145",
+                "on-secondary-container": "#83c2a9",
+                "surface-container": "#1c2021",
+                "outline-variant": "#3c4a42",
+                "surface-container-lowest": "#0b0f10",
+                "inverse-on-surface": "#2d3132",
+                "surface-tint": "#4edea3",
+                "tertiary": "#b7c8e1",
+                "on-secondary": "#003829",
+                "on-surface": "#e0e3e4",
+                "surface-bright": "#363a3b",
+                "on-tertiary-fixed": "#0b1c30",
+                "on-primary-fixed": "#002113",
+                "on-surface-variant": "#bbcabf",
+                "primary": "#4edea3",
+                "tertiary-fixed": "#d3e4fe",
+                "primary-fixed": "#6ffbbe",
+                "on-secondary-fixed": "#002117",
+                "on-error-container": "#ffdad6",
+                "error-container": "#93000a",
+                "secondary-fixed-dim": "#95d3ba",
+                "on-tertiary-container": "#2a3a4f",
+                "on-primary-fixed-variant": "#005236",
+                "surface-container-highest": "#313536",
+                "primary-fixed-dim": "#4edea3",
+                "on-tertiary-fixed-variant": "#38485d",
+                "error": "#ffb4ab",
+                "tertiary-container": "#94a4bd",
+                "on-primary": "#003824",
+                "secondary-container": "#0b513d",
+                "surface-container-low": "#181c1d",
+                "secondary-fixed": "#b0f0d6",
+                "inverse-surface": "#e0e3e4",
+                "background": "#101415",
+                "surface-container-high": "#272b2c",
+                "secondary": "#95d3ba",
+                "on-secondary-fixed-variant": "#0b513d"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+        },
+        "spacing": {
+                "xs": "4px",
+                "xl": "32px",
+                "gutter": "16px",
+                "md": "16px",
+                "lg": "24px",
+                "container-margin": "24px",
+                "unit": "4px",
+                "sm": "8px"
+        },
+        "fontFamily": {
+                "headline-sm": [
+                        "Hanken Grotesk"
+                ],
+                "body-md": [
+                        "Hanken Grotesk"
+                ],
+                "body-lg": [
+                        "Hanken Grotesk"
+                ],
+                "body-sm": [
+                        "Hanken Grotesk"
+                ],
+                "label-sm": [
+                        "Hanken Grotesk"
+                ],
+                "headline-md": [
+                        "Hanken Grotesk"
+                ],
+                "headline-lg-mobile": [
+                        "Hanken Grotesk"
+                ],
+                "headline-lg": [
+                        "Hanken Grotesk"
+                ],
+                "label-md": [
+                        "Hanken Grotesk"
+                ],
+                "display-lg": [
+                        "Hanken Grotesk"
+                ]
+        },
+        "fontSize": {
+                "headline-sm": [
+                        "20px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "500"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "body-sm": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-sm": [
+                        "10px",
+                        {
+                                "lineHeight": "14px",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "28px",
+                        {
+                                "lineHeight": "36px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "label-md": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "display-lg": [
+                        "48px",
+                        {
+                                "lineHeight": "56px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+</head>
+<body class="bg-surface text-on-surface font-body-md h-screen flex overflow-hidden">
+<!-- SideNavBar (Shared Component) -->
+<nav class="hidden md:flex flex-col h-screen py-8 px-4 border-r border-outline-variant/30 w-64 fixed left-0 top-0 bg-surface shadow-sm z-40">
+<div class="mb-8 px-4">
+<h1 class="font-display-lg text-headline-md font-bold text-primary">Rubix Merchant</h1>
+<p class="text-on-surface-variant font-body-md text-sm mt-1">Infrastructure</p>
+</div>
+<ul class="flex-1 space-y-2">
+<li>
+<a class="flex items-center space-x-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-body-md" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center space-x-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-body-md" href="#">
+<span class="material-symbols-outlined">subscriptions</span>
+<span>Subscriptions</span>
+</a>
+</li>
+<li>
+<a class="flex items-center space-x-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-body-md" href="#">
+<span class="material-symbols-outlined">layers</span>
+<span>Plans</span>
+</a>
+</li>
+<li>
+<a class="flex items-center space-x-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-body-md" href="#">
+<span class="material-symbols-outlined">group</span>
+<span>Customers</span>
+</a>
+</li>
+<li>
+<a class="flex items-center space-x-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-body-md" href="#">
+<span class="material-symbols-outlined">code</span>
+<span>Developers</span>
+</a>
+</li>
+<li>
+<a class="flex items-center space-x-3 px-4 py-3 rounded-lg text-primary font-semibold border-r-4 border-primary bg-surface-container-low transition-colors font-body-md opacity-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</li>
+</ul>
+<div class="mt-auto px-4">
+<button class="w-full bg-primary-container text-on-primary-container py-3 px-4 rounded-lg font-body-md font-semibold hover:opacity-90 transition-opacity">
+                Create New Plan
+            </button>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 ml-0 md:ml-64 overflow-y-auto bg-surface-container-lowest flex flex-col min-h-screen">
+<!-- Mobile Header (Visible only on md-) -->
+<header class="md:hidden flex items-center justify-between p-4 border-b border-outline-variant/20 bg-surface">
+<h1 class="font-headline-md text-headline-md text-on-surface">Settings</h1>
+<button class="text-on-surface-variant">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<div class="p-gutter max-w-container-max mx-auto w-full flex-1">
+<div class="mb-xl">
+<h2 class="font-headline-md text-headline-md text-on-surface">Developer Settings</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-unit">Manage your API keys and webhook configurations for integrations.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- API Keys Section -->
+<div class="col-span-1 lg:col-span-7 space-y-md">
+<section class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-md shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
+<div class="flex items-center justify-between mb-md border-b border-outline-variant/20 pb-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface text-lg">API Keys</h3>
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-3 py-1 rounded-full font-label-md text-label-md text-xs">Live Environment</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mb-md">These keys allow you to authenticate API requests. Keep your secret key safe and never share it publicly.</p>
+<!-- Secret Key -->
+<div class="mb-md">
+<label class="block font-body-md text-body-md font-semibold text-on-surface mb-unit text-sm">Secret Key</label>
+<div class="flex items-center group">
+<div class="relative flex-1">
+<input class="w-full bg-surface-container-low border border-outline-variant/50 rounded-l-lg py-2 pl-3 pr-10 font-label-md text-label-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/50 transition-all" readonly="" type="password" value="sk_live_12345abcde67890fghij"/>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+<button class="bg-surface-container-highest border border-l-0 border-outline-variant/50 hover:bg-outline-variant/20 text-on-surface-variant px-4 py-2 rounded-r-lg flex items-center justify-center transition-colors h-[42px]">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+</button>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant text-xs mt-1">Use this key on your server-side code to make API calls.</p>
+</div>
+<!-- Public Key -->
+<div>
+<label class="block font-body-md text-body-md font-semibold text-on-surface mb-unit text-sm">Public Key</label>
+<div class="flex items-center">
+<input class="flex-1 bg-surface-container-low border border-outline-variant/50 rounded-l-lg py-2 px-3 font-label-md text-label-md text-on-surface focus:outline-none" readonly="" type="text" value="pk_live_09876zyxwv54321utsrq"/>
+<button class="bg-surface-container-highest border border-l-0 border-outline-variant/50 hover:bg-outline-variant/20 text-on-surface-variant px-4 py-2 rounded-r-lg flex items-center justify-center transition-colors h-[42px]">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+</button>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant text-xs mt-1">Use this key in your client-side code (e.g., checkout forms).</p>
+</div>
+<div class="mt-md pt-sm border-t border-outline-variant/20 flex justify-end">
+<button class="text-error hover:bg-error-container hover:text-on-error-container px-4 py-2 rounded-lg font-body-md text-sm font-semibold transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">autorenew</span>
+                                Roll Keys
+                            </button>
+</div>
+</section>
+</div>
+<!-- Webhooks Section -->
+<div class="col-span-1 lg:col-span-5 space-y-md">
+<section class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-md shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
+<div class="flex items-center justify-between mb-md border-b border-outline-variant/20 pb-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface text-lg">Webhooks</h3>
+<div class="w-3 h-3 bg-primary-container rounded-full shadow-[0_0_8px_rgba(16,185,129,0.6)]"></div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mb-md">Configure endpoints to receive real-time notifications about events happening in your account.</p>
+<!-- Webhook URL -->
+<div class="mb-md">
+<label class="block font-body-md text-body-md font-semibold text-on-surface mb-unit text-sm">Endpoint URL</label>
+<input class="w-full bg-surface-container-low border border-outline-variant/50 rounded-lg py-2 px-3 font-label-md text-label-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/50 transition-all" placeholder="https://your-domain.com/webhooks/rubix" type="url" value="https://api.merchant.com/v1/rubix-webhooks"/>
+</div>
+<!-- Webhook Secret -->
+<div class="mb-md">
+<label class="block font-body-md text-body-md font-semibold text-on-surface mb-unit text-sm">Signing Secret</label>
+<div class="flex items-center">
+<div class="relative flex-1">
+<input class="w-full bg-surface-container-low border border-outline-variant/50 rounded-l-lg py-2 pl-3 pr-10 font-label-md text-label-md text-on-surface focus:outline-none" readonly="" type="password" value="whsec_klmno12345pqrst67890uvwxy"/>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+<button class="bg-surface-container-highest border border-l-0 border-outline-variant/50 hover:bg-outline-variant/20 text-on-surface-variant px-4 py-2 rounded-r-lg flex items-center justify-center transition-colors h-[42px]">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+</button>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant text-xs mt-1">Verify webhook payloads using this secret.</p>
+</div>
+<!-- Actions -->
+<div class="mt-md pt-sm border-t border-outline-variant/20 flex flex-col sm:flex-row gap-3">
+<button class="flex-1 bg-surface-container-high hover:bg-surface-variant text-on-surface px-4 py-2 rounded-lg font-body-md text-sm font-semibold transition-colors border border-outline-variant/30 flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">send</span>
+                                Send Test
+                            </button>
+<button class="flex-1 bg-primary-container text-on-primary-container px-4 py-2 rounded-lg font-body-md text-sm font-semibold hover:opacity-90 transition-all">
+                                Save Settings
+                            </button>
+</div>
+</section>
+</div>
+</div>
+</div>
+</main>
+</body></html>

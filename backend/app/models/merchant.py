@@ -32,6 +32,10 @@ class Merchant(Base):
     # bcrypt hash of the API key — NEVER the raw key
     secret_key_hash: Mapped[str] = mapped_column(String, nullable=False)
 
+    # bcrypt hash of the login password
+    password_hash: Mapped[str | None] = mapped_column(String, nullable=True)
+
+
     # Where SubPay POSTs subscription events (payment received, lapsed, etc.)
     webhook_url: Mapped[str | None] = mapped_column(String, nullable=True)
     # HMAC secret used to sign outbound webhook payloads

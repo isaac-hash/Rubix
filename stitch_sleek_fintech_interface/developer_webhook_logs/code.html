@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rubix Merchant - Webhook Logs</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "inverse-primary": "#006c49",
+                "tertiary-fixed-dim": "#b7c8e1",
+                "surface": "#101415",
+                "on-primary-container": "#00422b",
+                "primary-container": "#10b981",
+                "on-error": "#690005",
+                "surface-variant": "#313536",
+                "outline": "#86948a",
+                "on-background": "#e0e3e4",
+                "surface-dim": "#101415",
+                "on-tertiary": "#213145",
+                "on-secondary-container": "#83c2a9",
+                "surface-container": "#1c2021",
+                "outline-variant": "#3c4a42",
+                "surface-container-lowest": "#0b0f10",
+                "inverse-on-surface": "#2d3132",
+                "surface-tint": "#4edea3",
+                "tertiary": "#b7c8e1",
+                "on-secondary": "#003829",
+                "on-surface": "#e0e3e4",
+                "surface-bright": "#363a3b",
+                "on-tertiary-fixed": "#0b1c30",
+                "on-primary-fixed": "#002113",
+                "on-surface-variant": "#bbcabf",
+                "primary": "#4edea3",
+                "tertiary-fixed": "#d3e4fe",
+                "primary-fixed": "#6ffbbe",
+                "on-secondary-fixed": "#002117",
+                "on-error-container": "#ffdad6",
+                "error-container": "#93000a",
+                "secondary-fixed-dim": "#95d3ba",
+                "on-tertiary-container": "#2a3a4f",
+                "on-primary-fixed-variant": "#005236",
+                "surface-container-highest": "#313536",
+                "primary-fixed-dim": "#4edea3",
+                "on-tertiary-fixed-variant": "#38485d",
+                "error": "#ffb4ab",
+                "tertiary-container": "#94a4bd",
+                "on-primary": "#003824",
+                "secondary-container": "#0b513d",
+                "surface-container-low": "#181c1d",
+                "secondary-fixed": "#b0f0d6",
+                "inverse-surface": "#e0e3e4",
+                "background": "#101415",
+                "surface-container-high": "#272b2c",
+                "secondary": "#95d3ba",
+                "on-secondary-fixed-variant": "#0b513d"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+        },
+        "spacing": {
+                "xs": "4px",
+                "xl": "32px",
+                "gutter": "16px",
+                "md": "16px",
+                "lg": "24px",
+                "container-margin": "24px",
+                "unit": "4px",
+                "sm": "8px"
+        },
+        "fontFamily": {
+                "headline-sm": [
+                        "Hanken Grotesk"
+                ],
+                "body-md": [
+                        "Hanken Grotesk"
+                ],
+                "body-lg": [
+                        "Hanken Grotesk"
+                ],
+                "body-sm": [
+                        "Hanken Grotesk"
+                ],
+                "label-sm": [
+                        "Hanken Grotesk"
+                ],
+                "headline-md": [
+                        "Hanken Grotesk"
+                ],
+                "headline-lg-mobile": [
+                        "Hanken Grotesk"
+                ],
+                "headline-lg": [
+                        "Hanken Grotesk"
+                ],
+                "label-md": [
+                        "Hanken Grotesk"
+                ],
+                "display-lg": [
+                        "Hanken Grotesk"
+                ]
+        },
+        "fontSize": {
+                "headline-sm": [
+                        "20px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "500"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "body-sm": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-sm": [
+                        "10px",
+                        {
+                                "lineHeight": "14px",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "28px",
+                        {
+                                "lineHeight": "36px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "label-md": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "display-lg": [
+                        "48px",
+                        {
+                                "lineHeight": "56px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md antialiased min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="w-64 h-full fixed left-0 top-0 bg-surface shadow-sm flex flex-col h-screen py-8 px-4 border-r border-outline-variant/30 z-40 hidden md:flex">
+<div class="mb-10 px-4">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Rubix Merchant</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Infrastructure</p>
+</div>
+<ul class="flex-1 space-y-2">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT hover:bg-surface-container-high transition-colors text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT hover:bg-surface-container-high transition-colors text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="subscriptions">subscriptions</span>
+<span class="font-body-md text-body-md">Subscriptions</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT hover:bg-surface-container-high transition-colors text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="layers">layers</span>
+<span class="font-body-md text-body-md">Plans</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT hover:bg-surface-container-high transition-colors text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-body-md text-body-md">Customers</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT hover:bg-surface-container-high transition-colors text-primary font-semibold border-r-4 border-primary opacity-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="code">code</span>
+<span class="font-body-md text-body-md">Developers</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT hover:bg-surface-container-high transition-colors text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+</li>
+</ul>
+<div class="mt-auto px-4">
+<button class="w-full bg-primary text-on-primary py-3 rounded-DEFAULT font-body-md text-body-md font-medium shadow-sm hover:bg-primary-fixed-variant transition-colors">
+                Create New Plan
+            </button>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-1 ml-0 md:ml-64 flex flex-col min-h-screen relative">
+<!-- Header area for context (not the TopNavBar consumer component) -->
+<header class="px-gutter py-xl border-b border-outline-variant/20 bg-surface-container-lowest sticky top-0 z-30">
+<div class="max-w-7xl mx-auto flex justify-between items-end">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<a class="text-primary hover:underline font-label-sm text-label-sm" href="#">Developers</a>
+<span class="text-outline material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+<span class="text-on-surface font-label-sm text-label-sm">Webhooks</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Webhook Logs</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Monitor real-time event deliveries to your configured endpoints.</p>
+</div>
+<div class="flex gap-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="pl-10 pr-4 py-2 border border-outline-variant rounded-DEFAULT bg-surface text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-body-md text-body-md w-64 transition-all" placeholder="Search event ID..." type="text"/>
+</div>
+<button class="px-4 py-2 border border-outline-variant rounded-DEFAULT bg-surface text-on-surface flex items-center gap-2 hover:bg-surface-container-low transition-colors font-body-md text-body-md">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+                        Filter
+                    </button>
+</div>
+</div>
+</header>
+<div class="flex-1 px-gutter py-xl bg-surface">
+<div class="max-w-7xl mx-auto">
+<!-- Stats Overview Bento -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-xl">
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/20">
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-2 uppercase">Total Events (24h)</p>
+<p class="font-display-lg text-display-lg text-on-surface">24,592</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/20">
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-2 uppercase">Success Rate</p>
+<div class="flex items-center gap-3">
+<p class="font-display-lg text-display-lg text-on-surface">99.8%</p>
+<span class="px-2 py-1 rounded-full bg-primary/10 text-primary font-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="trending_up">trending_up</span>
+                                0.1%
+                            </span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/20">
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-2 uppercase">Failed Deliveries</p>
+<div class="flex justify-between items-center">
+<p class="font-display-lg text-display-lg text-error">42</p>
+<button class="text-primary font-body-md text-body-md hover:underline">View All</button>
+</div>
+</div>
+</div>
+<!-- High Density Table -->
+<div class="bg-surface-container-lowest rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/20 overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant/20 bg-surface-container-low/50">
+<th class="px-6 py-4 font-label-sm text-label-sm text-on-surface-variant font-medium">Timestamp</th>
+<th class="px-6 py-4 font-label-sm text-label-sm text-on-surface-variant font-medium">Event Type</th>
+<th class="px-6 py-4 font-label-sm text-label-sm text-on-surface-variant font-medium">Endpoint</th>
+<th class="px-6 py-4 font-label-sm text-label-sm text-on-surface-variant font-medium">Status</th>
+<th class="px-6 py-4 font-label-sm text-label-sm text-on-surface-variant font-medium text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10 font-body-sm text-body-sm">
+<!-- Success Row -->
+<tr class="hover:bg-surface-container-lowest/50 transition-colors">
+<td class="px-6 py-4 text-on-surface">
+                                        2024-05-20 14:32:01 UTC
+                                        <span class="block text-outline text-xs mt-1">evt_9J2xQW...</span>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-surface-container text-on-surface font-medium border border-outline-variant/20">subscription.created</span>
+</td>
+<td class="px-6 py-4 text-on-surface-variant truncate max-w-[200px]">
+                                        https://api.merchant.com/webhooks/rubix
+                                    </td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="text-on-surface">200 OK</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2" title="View Payload">
+<span class="material-symbols-outlined text-[20px]" data-icon="visibility">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Failed Row -->
+<tr class="hover:bg-surface-container-lowest/50 transition-colors bg-error-container/10">
+<td class="px-6 py-4 text-on-surface">
+                                        2024-05-20 14:30:15 UTC
+                                        <span class="block text-outline text-xs mt-1">evt_8K1pRT...</span>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-surface-container text-on-surface font-medium border border-outline-variant/20">invoice.payment_failed</span>
+</td>
+<td class="px-6 py-4 text-on-surface-variant truncate max-w-[200px]">
+                                        https://api.merchant.com/webhooks/rubix
+                                    </td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="text-error font-medium">503 Service Unavailable</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right flex items-center justify-end gap-2">
+<button class="text-primary hover:text-primary-fixed-variant transition-colors flex items-center gap-1 font-medium bg-primary/10 px-3 py-1 rounded-DEFAULT border border-primary/20">
+<span class="material-symbols-outlined text-[16px]" data-icon="refresh">refresh</span>
+                                            Redeliver
+                                        </button>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2" title="View Payload">
+<span class="material-symbols-outlined text-[20px]" data-icon="visibility">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Success Row -->
+<tr class="hover:bg-surface-container-lowest/50 transition-colors">
+<td class="px-6 py-4 text-on-surface">
+                                        2024-05-20 14:28:44 UTC
+                                        <span class="block text-outline text-xs mt-1">evt_7M5nLK...</span>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-surface-container text-on-surface font-medium border border-outline-variant/20">customer.updated</span>
+</td>
+<td class="px-6 py-4 text-on-surface-variant truncate max-w-[200px]">
+                                        https://api.merchant.com/webhooks/rubix
+                                    </td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="text-on-surface">200 OK</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2" title="View Payload">
+<span class="material-symbols-outlined text-[20px]" data-icon="visibility">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Retrying Row -->
+<tr class="hover:bg-surface-container-lowest/50 transition-colors">
+<td class="px-6 py-4 text-on-surface">
+                                        2024-05-20 14:25:10 UTC
+                                        <span class="block text-outline text-xs mt-1">evt_6P9xZW...</span>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-surface-container text-on-surface font-medium border border-outline-variant/20">plan.deleted</span>
+</td>
+<td class="px-6 py-4 text-on-surface-variant truncate max-w-[200px]">
+                                        https://api.merchant.com/webhooks/rubix
+                                    </td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#FF9800]"></span>
+<span class="text-on-surface">Pending (Retry 1/3)</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2" title="View Payload">
+<span class="material-symbols-outlined text-[20px]" data-icon="visibility">visibility</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-6 py-4 border-t border-outline-variant/20 bg-surface-container-lowest flex items-center justify-between">
+<p class="font-label-sm text-label-sm text-on-surface-variant">Showing 1 to 4 of 24,592 entries</p>
+<div class="flex gap-2">
+<button class="px-3 py-1 border border-outline-variant rounded bg-surface text-on-surface-variant disabled:opacity-50" disabled="">Previous</button>
+<button class="px-3 py-1 border border-outline-variant rounded bg-surface text-on-surface hover:bg-surface-container-low transition-colors">Next</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="w-full py-xl px-gutter flex flex-col md:flex-row justify-between items-center border-t border-outline-variant/20 bg-surface mt-auto">
+<div class="mb-4 md:mb-0">
+<span class="font-headline-md text-body-lg font-bold text-on-surface">Rubix</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">© 2024 Rubix Africa. Secure infrastructure for modern payments.</p>
+</div>
+<div class="flex gap-6">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-opacity" href="#">Terms</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-opacity" href="#">Privacy</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-opacity" href="#">API Docs</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-opacity" href="#">Status</a>
+</div>
+</footer>
+</main>
+</body></html>

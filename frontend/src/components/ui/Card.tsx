@@ -5,20 +5,20 @@ import { motion, HTMLMotionProps } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface CardProps extends HTMLMotionProps<"div"> {
-  isGlass?: boolean;
+  variant?: "default" | "surface";
 }
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, isGlass = true, children, ...props }, ref) => {
+  ({ className, variant = "default", children, ...props }, ref) => {
     return (
       <motion.div
         ref={ref}
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+        transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
         className={cn(
-          "rounded-3xl border border-slate-800 p-6 bg-surface overflow-hidden grain",
-          isGlass && "glass",
+          "rounded-[4px] border border-[#1c2021] p-6 bg-[#101415] relative overflow-hidden",
+          variant === "surface" && "bg-[#0b0f10]",
           className
         )}
         {...props}

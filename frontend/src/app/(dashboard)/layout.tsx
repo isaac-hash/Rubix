@@ -25,38 +25,33 @@ export default function DashboardLayout({
 
   if (!isAuthorized) {
     return (
-      <div className="h-screen w-screen bg-background flex items-center justify-center">
-        <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+      <div className="h-screen w-screen bg-[#0b0f10] flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-10 h-10 bg-[#10b981] rounded-[4px] flex items-center justify-center animate-pulse shadow-[0_0_20px_rgba(16,185,129,0.3)]">
+            <div className="w-5 h-5 border-2 border-[#0b0f10] border-t-transparent rounded-full animate-spin" />
+          </div>
+          <span className="text-[10px] font-bold text-[#10b981] uppercase tracking-[0.2em]">Rubix Secure</span>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="flex min-h-screen bg-background">
+    <div className="flex min-h-screen bg-[#0b0f10]">
       <Sidebar />
       <main className="flex-1 relative overflow-y-auto">
-        {/* Background Grain/Noise */}
-        <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-50">
-          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-            <filter id="noise">
-              <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
-            </filter>
-            <rect width="100%" height="100%" filter="url(#noise)" />
-          </svg>
-        </div>
-
-        <AnimatePresence mode="wait">
-          <motion.div
-            key="page-content"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-            className="p-8 sm:p-12 max-w-7xl mx-auto w-full"
-          >
-            {children}
-          </motion.div>
-        </AnimatePresence>
+        <motion.div
+          key="page-content"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+          className="p-8 sm:p-12 max-w-7xl mx-auto w-full"
+        >
+          {children}
+        </motion.div>
       </main>
     </div>
   );
+
+
 }

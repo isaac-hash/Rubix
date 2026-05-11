@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SubPay Consumer - My Subscriptions</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "background": "#101415",
+                "surface-container-lowest": "#0b0f10",
+                "surface-dim": "#101415",
+                "tertiary-container": "#94a4bd",
+                "inverse-primary": "#006c49",
+                "on-error": "#690005",
+                "on-secondary-container": "#83c2a9",
+                "tertiary-fixed-dim": "#b7c8e1",
+                "on-tertiary-fixed-variant": "#38485d",
+                "secondary-container": "#0b513d",
+                "primary-container": "#10b981",
+                "surface-tint": "#4edea3",
+                "surface-variant": "#313536",
+                "surface-bright": "#363a3b",
+                "on-secondary-fixed-variant": "#0b513d",
+                "surface": "#101415",
+                "surface-container": "#1c2021",
+                "on-primary": "#003824",
+                "on-tertiary": "#213145",
+                "surface-container-high": "#272b2c",
+                "secondary": "#95d3ba",
+                "primary-fixed": "#6ffbbe",
+                "error": "#ffb4ab",
+                "outline": "#86948a",
+                "on-primary-container": "#00422b",
+                "on-surface-variant": "#bbcabf",
+                "outline-variant": "#3c4a42",
+                "on-secondary": "#003829",
+                "primary-fixed-dim": "#4edea3",
+                "secondary-fixed": "#b0f0d6",
+                "primary": "#4edea3",
+                "on-primary-fixed-variant": "#005236",
+                "tertiary-fixed": "#d3e4fe",
+                "on-surface": "#e0e3e4",
+                "on-tertiary-container": "#2a3a4f",
+                "on-secondary-fixed": "#002117",
+                "on-background": "#e0e3e4",
+                "surface-container-low": "#181c1d",
+                "on-error-container": "#ffdad6",
+                "tertiary": "#b7c8e1",
+                "inverse-surface": "#e0e3e4",
+                "error-container": "#93000a",
+                "on-tertiary-fixed": "#0b1c30",
+                "inverse-on-surface": "#2d3132",
+                "on-primary-fixed": "#002113",
+                "secondary-fixed-dim": "#95d3ba",
+                "surface-container-highest": "#313536"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+        },
+        "spacing": {
+                "lg": "24px",
+                "gutter": "16px",
+                "xl": "32px",
+                "xs": "4px",
+                "md": "16px",
+                "sm": "8px",
+                "unit": "4px",
+                "container-margin": "24px"
+        },
+        "fontFamily": {
+                "body-md": [
+                        "Hanken Grotesk"
+                ],
+                "label-md": [
+                        "Hanken Grotesk"
+                ],
+                "label-sm": [
+                        "Hanken Grotesk"
+                ],
+                "headline-sm": [
+                        "Hanken Grotesk"
+                ],
+                "body-sm": [
+                        "Hanken Grotesk"
+                ],
+                "body-lg": [
+                        "Hanken Grotesk"
+                ],
+                "display-lg": [
+                        "Hanken Grotesk"
+                ],
+                "headline-lg": [
+                        "Hanken Grotesk"
+                ],
+                "headline-md": [
+                        "Hanken Grotesk"
+                ],
+                "headline-lg-mobile": [
+                        "Hanken Grotesk"
+                ]
+        },
+        "fontSize": {
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-md": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "label-sm": [
+                        "10px",
+                        {
+                                "lineHeight": "14px",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-sm": [
+                        "20px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "500"
+                        }
+                ],
+                "body-sm": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "display-lg": [
+                        "48px",
+                        {
+                                "lineHeight": "56px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "28px",
+                        {
+                                "lineHeight": "36px",
+                                "fontWeight": "600"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Subtle shadow utilities based on guidelines */
+        .shadow-level-1 {
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .shadow-level-2 {
+            box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col pt-16">
+<!-- TopNavBar Component -->
+<nav class="bg-surface/80 backdrop-blur-xl shadow-sm fixed top-0 w-full z-50 flex justify-between items-center px-gutter h-16 max-w-container-max mx-auto border-b border-outline-variant/10">
+<!-- Brand Logo -->
+<div class="font-display-lg text-headline-md font-bold text-primary">
+            Rubix Consumer
+        </div>
+<!-- Navigation Links (Hidden on mobile, flex on md+) -->
+<div class="hidden md:flex space-x-8 items-center h-full">
+<a class="h-full flex items-center text-primary font-bold border-b-2 border-primary pb-1 active:scale-95 transition-transform" href="#">
+                My Subscriptions
+            </a>
+<a class="h-full flex items-center text-on-surface-variant hover:text-primary transition-colors" href="#">
+                Billing
+            </a>
+<a class="h-full flex items-center text-on-surface-variant hover:text-primary transition-colors" href="#">
+                Support
+            </a>
+</div>
+<!-- Trailing Actions -->
+<div class="flex items-center space-x-4">
+<button class="hidden md:block bg-primary text-on-primary px-4 py-2 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-colors shadow-level-2">
+                Magic Link Login
+            </button>
+<div class="flex space-x-2">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors" data-icon="help">help</span>
+</div>
+<img alt="User Avatar" class="w-8 h-8 rounded-full border border-outline-variant/30 object-cover" data-alt="A small, circular avatar portrait of a modern user in a soft, bright lighting setup. The portrait is cleanly framed within a minimalist, corporate modern interface context, using a soft white and deep blue global palette to convey effortless security and professionalism." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKjhCLxCvi65uYu4Aa-WjBQBocjzh1R4fnzJEe8QDbiRTKg6yAoMp08kOUcGN9bNBPZbMRsGloM3RDBp6xccyUJ9mBAmaEHAc1TMZjlxHxaoZQg9OjMldvkHryKamWr_a-yU5GzbCIc_Lr8Hzo8ipgzdaYkS8VgjzszEp8UfHgRTKDL27L_qTJ6dV9WLLP392uddMieUCzveHyXpFmDvnYd44S06mFKZs1GfEf2ax1nLeta9BGbT8mtr2Rtkmz4J0QrG8ws9mg-IMe"/>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="flex-1 w-full max-w-container-max mx-auto px-4 md:px-gutter py-lg flex flex-col gap-lg">
+<!-- Page Header -->
+<header class="flex flex-col gap-xs">
+<h1 class="font-headline-lg-mobile md:font-display-lg text-headline-lg-mobile md:text-display-lg text-on-surface">Active Plans</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Manage your recurring payments and upcoming renewals.</p>
+</header>
+<!-- Subscriptions List -->
+<div class="flex flex-col gap-sm">
+<!-- Card 1: Musicbox -->
+<div class="bg-surface-container-lowest rounded-xl p-sm shadow-level-1 border border-outline-variant/20 flex flex-col gap-xs md:flex-row md:items-center md:justify-between transition-all hover:shadow-level-2 hover:border-outline-variant/40 group">
+<div class="flex items-center gap-sm">
+<div class="w-14 h-14 rounded-lg bg-surface-container flex items-center justify-center overflow-hidden shrink-0 border border-outline-variant/10">
+<img alt="Musicbox Logo" class="w-full h-full object-cover" data-alt="A clean, minimalist app icon featuring a stylized music note symbol on a bright, vibrant gradient background. The icon is framed within a rounded square container, lit by soft ambient light typical of a premium fintech interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3njGQdnLMGz0bNTTR9fzaWSfddSJEEhtXG5Y6AiKuNLQzFQqaOoFJ3k9iKyr9zGAtCtypM4-yU428BpCqJBiFgX9yyzYvkP2XJiYMEnnHv7WeD-UnecGCeFNCpqEVvd4rLr6Nt01HSCcK99MMiWEUn4vQ5HJRIlKT1KlVkoKF-hMigchmfzjNqLJQ-Bjrdr3s3sNQ8-IDRLkuZVWQaQzsIe2cPmLFseNno-YVUnsF1zzEFzIzS5O1hEuaovdF2UPYeSCFEACQ1JTL"/>
+</div>
+<div class="flex flex-col">
+<h3 class="font-body-lg text-body-lg font-bold text-on-surface group-hover:text-primary transition-colors">Musicbox Premium</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Musicbox</p>
+</div>
+</div>
+<div class="flex flex-row justify-between items-end md:flex-col md:items-end mt-2 md:mt-0 pt-2 md:pt-0 border-t md:border-t-0 border-outline-variant/10">
+<div class="flex flex-col md:items-end">
+<div class="font-headline-md text-headline-md text-on-surface">$12.99<span class="font-label-md text-label-md text-on-surface-variant ml-1">/mo</span></div>
+<div class="font-body-md text-body-md text-on-surface-variant mt-1">Renews Oct 15</div>
+</div>
+<div class="bg-primary/10 text-primary font-label-md text-label-md px-3 py-1 rounded-full border border-primary/20 md:mt-2">
+                        Active
+                    </div>
+</div>
+</div>
+<!-- Card 2: GymHQ -->
+<div class="bg-surface-container-lowest rounded-xl p-sm shadow-level-1 border border-outline-variant/20 flex flex-col gap-xs md:flex-row md:items-center md:justify-between transition-all hover:shadow-level-2 hover:border-outline-variant/40 group">
+<div class="flex items-center gap-sm">
+<div class="w-14 h-14 rounded-lg bg-surface-container flex items-center justify-center overflow-hidden shrink-0 border border-outline-variant/10">
+<img alt="GymHQ Logo" class="w-full h-full object-cover" data-alt="A sleek, modern icon for a fitness app showing an abstract geometric dumbbell shape in deep charcoal and bright indigo. The icon sits within a soft white, rounded container, illuminated by crisp studio lighting appropriate for a high-end corporate dashboard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmMR29E3IoS113XwhVhVvDPPgWMB_-A93fC9i2Bg3UD5ZL3nE24JTgMsJzgi4GNQMt77NZoQfeUfgnvVYIAg3FJR3TkmYmv0eIwh3VyhdG6Y-CGKCbl_hY2T140HWDsaVPi0ziyfBJH1BNV34-R8LmOlHlAUZ3tgt4nMlS0lsIsVKZlZ5nq5AHG0liEac9pfrxuPiv0mXCH5eDT1KFJVRcHqlVn9RhG5xZSTf1O6l6hiy23ogF7hBndfc73LVLUk_yRZEZmnZbJhjl"/>
+</div>
+<div class="flex flex-col">
+<h3 class="font-body-lg text-body-lg font-bold text-on-surface group-hover:text-primary transition-colors">All-Access Membership</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">GymHQ</p>
+</div>
+</div>
+<div class="flex flex-row justify-between items-end md:flex-col md:items-end mt-2 md:mt-0 pt-2 md:pt-0 border-t md:border-t-0 border-outline-variant/10">
+<div class="flex flex-col md:items-end">
+<div class="font-headline-md text-headline-md text-on-surface">$45.00<span class="font-label-md text-label-md text-on-surface-variant ml-1">/mo</span></div>
+<div class="font-body-md text-body-md text-on-surface-variant mt-1">Renews Oct 22</div>
+</div>
+<div class="bg-primary/10 text-primary font-label-md text-label-md px-3 py-1 rounded-full border border-primary/20 md:mt-2">
+                        Active
+                    </div>
+</div>
+</div>
+<!-- Card 3: CloudStorage (Pending) -->
+<div class="bg-surface-container-lowest rounded-xl p-sm shadow-level-1 border border-outline-variant/20 flex flex-col gap-xs md:flex-row md:items-center md:justify-between transition-all hover:shadow-level-2 hover:border-outline-variant/40 opacity-80 group">
+<div class="flex items-center gap-sm">
+<div class="w-14 h-14 rounded-lg bg-surface-container flex items-center justify-center overflow-hidden shrink-0 border border-outline-variant/10">
+<span class="material-symbols-outlined text-outline" data-icon="cloud">cloud</span>
+</div>
+<div class="flex flex-col">
+<h3 class="font-body-lg text-body-lg font-bold text-on-surface">2TB Storage Plan</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">CloudDrive</p>
+</div>
+</div>
+<div class="flex flex-row justify-between items-end md:flex-col md:items-end mt-2 md:mt-0 pt-2 md:pt-0 border-t md:border-t-0 border-outline-variant/10">
+<div class="flex flex-col md:items-end">
+<div class="font-headline-md text-headline-md text-on-surface-variant">$9.99<span class="font-label-md text-label-md text-on-surface-variant ml-1">/mo</span></div>
+<div class="font-body-md text-body-md text-on-surface-variant mt-1">Processing</div>
+</div>
+<div class="bg-outline/10 text-outline font-label-md text-label-md px-3 py-1 rounded-full border border-outline/20 md:mt-2">
+                        Pending
+                    </div>
+</div>
+</div>
+</div>
+<!-- Unclaimed Prompt / CTA -->
+<div class="mt-sm bg-surface-container/50 backdrop-blur-sm rounded-xl p-lg flex flex-col md:flex-row items-center md:justify-between text-center md:text-left border border-outline-variant/20 shadow-level-1">
+<div class="flex flex-col gap-xs max-w-lg mb-6 md:mb-0">
+<div class="flex items-center justify-center md:justify-start gap-2 mb-2">
+<span class="material-symbols-outlined text-primary" data-icon="shield_lock">shield_lock</span>
+<h4 class="font-body-lg text-body-lg font-bold text-on-surface">Guest Session Active</h4>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                    You are currently managing these subscriptions in a temporary view. Authenticate to save your payment methods and manage plans across devices.
+                </p>
+</div>
+<button class="w-full md:w-auto bg-primary text-on-primary px-6 py-3 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-colors shadow-level-2 whitespace-nowrap">
+                Magic Link Login
+            </button>
+</div>
+</main>
+<!-- Footer Component -->
+<footer class="w-full py-lg px-4 md:px-gutter flex flex-col md:flex-row justify-between items-center border-t border-outline-variant/20 bg-surface mt-auto">
+<div class="font-display-lg md:font-body-lg text-body-lg font-bold text-on-surface mb-4 md:mb-0">
+            Rubix Consumer
+        </div>
+<div class="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-4 md:mb-0">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Terms</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">API Docs</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Status</a>
+</div>
+<div class="font-label-md text-label-md text-on-surface-variant text-center md:text-right">
+            © 2024 Rubix Africa. Secure infrastructure for modern payments.
+        </div>
+</footer>
+</body></html>

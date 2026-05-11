@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rubix Consumer - Subscription Detail</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "inverse-primary": "#006c49",
+                "tertiary-fixed-dim": "#b7c8e1",
+                "surface": "#101415",
+                "on-primary-container": "#00422b",
+                "primary-container": "#10b981",
+                "on-error": "#690005",
+                "surface-variant": "#313536",
+                "outline": "#86948a",
+                "on-background": "#e0e3e4",
+                "surface-dim": "#101415",
+                "on-tertiary": "#213145",
+                "on-secondary-container": "#83c2a9",
+                "surface-container": "#1c2021",
+                "outline-variant": "#3c4a42",
+                "surface-container-lowest": "#0b0f10",
+                "inverse-on-surface": "#2d3132",
+                "surface-tint": "#4edea3",
+                "tertiary": "#b7c8e1",
+                "on-secondary": "#003829",
+                "on-surface": "#e0e3e4",
+                "surface-bright": "#363a3b",
+                "on-tertiary-fixed": "#0b1c30",
+                "on-primary-fixed": "#002113",
+                "on-surface-variant": "#bbcabf",
+                "primary": "#4edea3",
+                "tertiary-fixed": "#d3e4fe",
+                "primary-fixed": "#6ffbbe",
+                "on-secondary-fixed": "#002117",
+                "on-error-container": "#ffdad6",
+                "error-container": "#93000a",
+                "secondary-fixed-dim": "#95d3ba",
+                "on-tertiary-container": "#2a3a4f",
+                "on-primary-fixed-variant": "#005236",
+                "surface-container-highest": "#313536",
+                "primary-fixed-dim": "#4edea3",
+                "on-tertiary-fixed-variant": "#38485d",
+                "error": "#ffb4ab",
+                "tertiary-container": "#94a4bd",
+                "on-primary": "#003824",
+                "secondary-container": "#0b513d",
+                "surface-container-low": "#181c1d",
+                "secondary-fixed": "#b0f0d6",
+                "inverse-surface": "#e0e3e4",
+                "background": "#101415",
+                "surface-container-high": "#272b2c",
+                "secondary": "#95d3ba",
+                "on-secondary-fixed-variant": "#0b513d"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+        },
+        "spacing": {
+                "xs": "4px",
+                "xl": "32px",
+                "gutter": "16px",
+                "md": "16px",
+                "lg": "24px",
+                "container-margin": "24px",
+                "unit": "4px",
+                "sm": "8px"
+        },
+        "fontFamily": {
+                "headline-sm": [
+                        "Hanken Grotesk"
+                ],
+                "body-md": [
+                        "Hanken Grotesk"
+                ],
+                "body-lg": [
+                        "Hanken Grotesk"
+                ],
+                "body-sm": [
+                        "Hanken Grotesk"
+                ],
+                "label-sm": [
+                        "Hanken Grotesk"
+                ],
+                "headline-md": [
+                        "Hanken Grotesk"
+                ],
+                "headline-lg-mobile": [
+                        "Hanken Grotesk"
+                ],
+                "headline-lg": [
+                        "Hanken Grotesk"
+                ],
+                "label-md": [
+                        "Hanken Grotesk"
+                ],
+                "display-lg": [
+                        "Hanken Grotesk"
+                ]
+        },
+        "fontSize": {
+                "headline-sm": [
+                        "20px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "500"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "body-sm": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-sm": [
+                        "10px",
+                        {
+                                "lineHeight": "14px",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "28px",
+                        {
+                                "lineHeight": "36px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "label-md": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "display-lg": [
+                        "48px",
+                        {
+                                "lineHeight": "56px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        .gradient-border-active {
+            position: relative;
+        }
+        .gradient-border-active::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, #4edea3, #0b513d);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md text-body-md antialiased selection:bg-primary selection:text-on-primary">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-gutter h-16 max-w-7xl mx-auto bg-surface/80 dark:bg-inverse-surface/80 backdrop-blur-xl bg-surface-container-lowest dark:bg-inverse-surface shadow-sm dark:shadow-none">
+<div class="flex items-center gap-xl">
+<a class="font-display-lg text-headline-md font-bold text-primary dark:text-inverse-primary tracking-tight" href="#">Rubix Consumer</a>
+<nav class="hidden md:flex items-center gap-md">
+<a class="font-body-md text-body-md text-primary dark:text-inverse-primary font-bold border-b-2 border-primary pb-1" href="#">My Subscriptions</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Billing</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Support</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<button class="hidden md:flex items-center justify-center px-4 py-2 bg-primary text-on-primary font-label-md text-label-md rounded-lg hover:bg-primary-container transition-colors shadow-sm">
+                Magic Link Login
+            </button>
+<div class="h-8 w-8 rounded-full bg-surface-container-high overflow-hidden border border-outline-variant/30 flex-shrink-0">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="A close up, professional headshot of a person looking directly at the camera. The lighting is soft and flattering, suitable for a modern corporate or tech avatar. The background is a subtle, neutral tone that does not distract from the subject. The overall aesthetic is clean and contemporary." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAQOJp4pDDLAKIp8Nsu0oFJ6e-VGwiRudi15i8XMWvadSK4sDrPMr3gHw3XCNMzByrni-EWJYqKvi-1r6mKvImlsuB9-K4PLuHtl3jE9lL7RSS-NeekKShaLNBuITQFpbuFGGOpvANJId4TWxZolNJx2NqJJLEYa519I0RZKPI_uDAEy2OtDLzfV7Lr9Q7Ty5A0za9Lm2Kj74t73UaJVbwvg4GOYqQxdDseAHDT0gzbbVPG-JDDiYzWUVBmbhc6HGbb4-aGDFArwDD"/>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="pt-24 pb-xl px-md md:px-gutter max-w-7xl mx-auto">
+<!-- Back Navigation (Contextual) -->
+<div class="mb-xl">
+<a class="inline-flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+                Back to Subscriptions
+            </a>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-xl">
+<!-- Left Column: Subscription Overview & Actions -->
+<div class="lg:col-span-4 flex flex-col gap-md">
+<!-- Hero Card -->
+<div class="bg-surface-container-lowest rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.03)] p-xl flex flex-col items-center text-center border border-outline-variant/20 gradient-border-active">
+<div class="w-24 h-24 rounded-2xl bg-surface-container flex items-center justify-center mb-md shadow-inner overflow-hidden">
+<img alt="Musicbox Logo" class="w-full h-full object-cover" data-alt="A stylized, modern, abstract representation of a musical note or soundwave, rendered in vibrant gradients of purple and blue on a dark background. The image should look like a sleek app icon for a premium music streaming service, fitting a minimalist UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfLAIDKlqv2n7js0Ua7-oEvRzD0ODI6lDUfM-gVKhHLOPjm07Y-WVIMCawGHRjGeJBfQF4A7WDYqUvYn1JI6PKbEDbE__01lM2WSOtuM7fb18Wl0krs970s8ksInjmgwYZN3-ony0iNvaS1bCijIEc1pD8fUUET2nS7JtL-59TzpN5M0-dIyNnjSsMqbP_vR0nwH-Fyd4sIcKaPRiG8v1waU2-SVB_WnbuZF7C7-g3x0qMfeqflSAt1SDorWkwziPQa81N9hNnH963"/>
+</div>
+<h1 class="font-headline-lg-mobile md:font-display-lg text-headline-lg-mobile md:text-display-lg text-on-surface mb-unit">Musicbox Premium</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-md">Family Plan</p>
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-low text-primary font-label-md text-label-md mb-xl">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                        Active
+                    </div>
+<div class="w-full flex flex-col gap-1 border-t border-outline-variant/20 pt-md">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Monthly Amount</span>
+<span class="font-headline-lg text-headline-lg text-on-surface">$14.99</span>
+</div>
+</div>
+<!-- Renewal Info Box -->
+<div class="bg-surface-container-low rounded-xl p-md border border-outline-variant/20 flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined" data-icon="event">event</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-sm text-on-surface mb-1">Next Renewal</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">November 15, 2024</p>
+<p class="font-label-md text-label-md text-on-surface-variant mt-2">Card ending in •••• 4242</p>
+</div>
+</div>
+<!-- Danger Zone -->
+<div class="mt-auto pt-xl">
+<button class="w-full py-3 px-4 rounded-lg border border-error text-error font-label-md text-label-md hover:bg-error-container transition-colors focus:ring-2 focus:ring-error focus:ring-offset-2 focus:outline-none bg-surface-container-lowest">
+                        Cancel Subscription
+                    </button>
+</div>
+</div>
+<!-- Right Column: Payment History & Details -->
+<div class="lg:col-span-8 flex flex-col gap-xl">
+<!-- Quick Stats Bento -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-sm">
+<div class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant/20 shadow-[0px_4px_20px_rgba(0,0,0,0.03)]">
+<span class="font-label-md text-label-md text-on-surface-variant block mb-2">Member Since</span>
+<span class="font-headline-md text-headline-md text-on-surface">Aug 2022</span>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant/20 shadow-[0px_4px_20px_rgba(0,0,0,0.03)]">
+<span class="font-label-md text-label-md text-on-surface-variant block mb-2">Total Paid</span>
+<span class="font-headline-md text-headline-md text-on-surface">$389.74</span>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant/20 shadow-[0px_4px_20px_rgba(0,0,0,0.03)]">
+<span class="font-label-md text-label-md text-on-surface-variant block mb-2">Billing Cycle</span>
+<span class="font-headline-md text-headline-md text-on-surface">Monthly</span>
+</div>
+</div>
+<!-- Payment History -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/20 shadow-[0px_4px_20px_rgba(0,0,0,0.03)] overflow-hidden">
+<div class="px-md py-sm border-b border-outline-variant/20 bg-surface-container-low/50 flex justify-between items-center">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Payment History</h2>
+<button class="text-primary font-label-md text-label-md hover:underline flex items-center gap-1">
+                            Download All
+                            <span class="material-symbols-outlined text-[16px]" data-icon="download">download</span>
+</button>
+</div>
+<div class="divide-y divide-outline-variant/20">
+<!-- History Item 1 -->
+<div class="p-md flex items-center justify-between hover:bg-surface-container-low transition-colors group cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+</div>
+<div>
+<p class="font-body-md text-body-md font-medium text-on-surface">Oct 15, 2024</p>
+<p class="font-label-md text-label-md text-on-surface-variant">Invoice #INV-2024-10</p>
+</div>
+</div>
+<div class="text-right flex items-center gap-4">
+<div>
+<p class="font-body-md text-body-md font-medium text-on-surface">$14.99</p>
+<p class="font-label-md text-label-md text-secondary inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="check_circle" data-weight="fill">check_circle</span>
+                                        Paid
+                                    </p>
+</div>
+<span class="material-symbols-outlined text-outline-variant opacity-0 group-hover:opacity-100 transition-opacity" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+<!-- History Item 2 -->
+<div class="p-md flex items-center justify-between hover:bg-surface-container-low transition-colors group cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+</div>
+<div>
+<p class="font-body-md text-body-md font-medium text-on-surface">Sep 15, 2024</p>
+<p class="font-label-md text-label-md text-on-surface-variant">Invoice #INV-2024-09</p>
+</div>
+</div>
+<div class="text-right flex items-center gap-4">
+<div>
+<p class="font-body-md text-body-md font-medium text-on-surface">$14.99</p>
+<p class="font-label-md text-label-md text-secondary inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="check_circle" data-weight="fill">check_circle</span>
+                                        Paid
+                                    </p>
+</div>
+<span class="material-symbols-outlined text-outline-variant opacity-0 group-hover:opacity-100 transition-opacity" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+<!-- History Item 3 -->
+<div class="p-md flex items-center justify-between hover:bg-surface-container-low transition-colors group cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+</div>
+<div>
+<p class="font-body-md text-body-md font-medium text-on-surface">Aug 15, 2024</p>
+<p class="font-label-md text-label-md text-on-surface-variant">Invoice #INV-2024-08</p>
+</div>
+</div>
+<div class="text-right flex items-center gap-4">
+<div>
+<p class="font-body-md text-body-md font-medium text-on-surface">$14.99</p>
+<p class="font-label-md text-label-md text-secondary inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="check_circle" data-weight="fill">check_circle</span>
+                                        Paid
+                                    </p>
+</div>
+<span class="material-symbols-outlined text-outline-variant opacity-0 group-hover:opacity-100 transition-opacity" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+<!-- History Item 4 -->
+<div class="p-md flex items-center justify-between hover:bg-surface-container-low transition-colors group cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+</div>
+<div>
+<p class="font-body-md text-body-md font-medium text-on-surface">Jul 15, 2024</p>
+<p class="font-label-md text-label-md text-on-surface-variant">Invoice #INV-2024-07</p>
+</div>
+</div>
+<div class="text-right flex items-center gap-4">
+<div>
+<p class="font-body-md text-body-md font-medium text-on-surface">$14.99</p>
+<p class="font-label-md text-label-md text-secondary inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="check_circle" data-weight="fill">check_circle</span>
+                                        Paid
+                                    </p>
+</div>
+<span class="material-symbols-outlined text-outline-variant opacity-0 group-hover:opacity-100 transition-opacity" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</div>
+<div class="p-4 border-t border-outline-variant/20 text-center">
+<button class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors">Load More History</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-xl px-gutter flex flex-col md:flex-row justify-between items-center border-t border-outline-variant/20 bg-surface dark:bg-inverse-surface mt-auto max-w-7xl mx-auto">
+<div class="font-display-lg text-body-lg font-bold text-on-surface dark:text-inverse-on-surface mb-4 md:mb-0">
+            Rubix
+        </div>
+<div class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant text-center md:text-left mb-4 md:mb-0">
+            © 2024 Rubix Africa. Secure infrastructure for modern payments.
+        </div>
+<nav class="flex gap-md">
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-inverse-on-surface transition-opacity" href="#">Terms</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-inverse-on-surface transition-opacity" href="#">Privacy</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-inverse-on-surface transition-opacity" href="#">API Docs</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-inverse-on-surface transition-opacity" href="#">Status</a>
+</nav>
+</footer>
+</body></html>

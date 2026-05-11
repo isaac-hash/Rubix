@@ -26,6 +26,12 @@ class MerchantSignup(BaseModel):
     password: str
 
 
+class MerchantLogin(BaseModel):
+    email: EmailStr
+    password: str
+
+
+
 # ── Response schemas (what the API returns) ───────────────────────────────────
 
 class MerchantResponse(BaseModel):

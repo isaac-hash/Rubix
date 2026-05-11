@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
-import { Outfit, Instrument_Sans } from "next/font/google";
+import { Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
 
-const outfit = Outfit({
-  variable: "--font-outfit",
+const hankenGrotesk = Hanken_Grotesk({
+  variable: "--font-hanken-grotesk",
   subsets: ["latin"],
 });
 
-const instrumentSans = Instrument_Sans({
-  variable: "--font-instrument-sans",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "SubPay | Subscription Infrastructure for Africa",
@@ -26,9 +22,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${outfit.variable} ${instrumentSans.variable} h-full antialiased`}
+      className={`${hankenGrotesk.variable} h-full antialiased`}
       suppressHydrationWarning
     >
+
 
       <body className="min-h-full flex flex-col font-body">{children}</body>
     </html>
