@@ -44,6 +44,7 @@ from app.models.subscription import Subscription, SubscriptionStatus
 from app.models.plan import Plan
 from app.models.virtual_account import VirtualAccount
 from app.models.customer import Customer
+from app.services.notifications import NotificationService
 
 # ── Sync DB setup for Celery workers ──────────────────────────────────────────
 _sync_url = settings.DATABASE_URL.replace("postgresql+asyncpg://", "postgresql+psycopg2://")
@@ -177,12 +178,17 @@ def send_renewal_reminders():
             plan = db.get(Plan, sub.plan_id)
             amount_naira = plan.amount / 100  # kobo → naira for display
 
-            # TODO Phase 4: Replace with real SMS/WhatsApp via Termii
-            print(
-                f"[SMS stub] To: {customer.phone} | "
-                f"Message: 'Your {plan.name} subscription of ₦{amount_naira:,.0f} "
-                f"renews on {reminder_date}. Please ensure funds are available.'"
+            # Phase 4: Real SMS via Termii
+            msg = (
+                f"Your {plan.name} subscription of ₦{amount_naira:,.0f} "
+                f"renews on {reminder_date}. Please ensure funds are available."
             )
+            NotificationService.send_sms_sync(customer.phone, msg)
+            
+            # Email backup
+            subject = f"Upcoming Renewal: {plan.name}"
+            html = f"<p>Hello {customer.name},</p><p>{msg}</p>"
+            NotificationService.send_email_sync(customer.email, subject, html)
 
     return {"reminded": len(due_soon)}
 
@@ -260,13 +266,18 @@ def send_renewal_payment_prompt(subscription_id: str):
             return
 
         amount_naira = plan.amount / 100
-        # TODO Phase 4: Real SMS/WhatsApp via Termii
-        print(
-            f"[SMS stub] To: {customer.phone} | "
-            f"'Transfer ₦{amount_naira:,.0f} to {va.account_number} ({va.bank_name}) "
+        # Phase 4: Real SMS via Termii
+        msg = (
+            f"Transfer ₦{amount_naira:,.0f} to {va.account_number} ({va.bank_name}) "
             f"to renew your {plan.name} subscription. "
-            f"Reference: your name. Expires in 3 days.'"
+            f"Reference: your name. Expires in 3 days."
         )
+        NotificationService.send_sms_sync(customer.phone, msg)
+
+        # Email backup
+        subject = f"Action Required: Renew your {plan.name} subscription"
+        html = f"<p>Hello {customer.name},</p><p>{msg}</p>"
+        NotificationService.send_email_sync(customer.email, subject, html)
 
 
 @shared_task(name="app.workers.renewal.notify_merchant_subscription_lapsed")

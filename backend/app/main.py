@@ -67,13 +67,14 @@ async def health_check():
 
 
 # ── Routers ───────────────────────────────────────────────────────────────────
-from app.api import auth, customers, plans, subscriptions, webhooks
+from app.api import auth, customers, plans, subscriptions, webhooks, merchants
 
 app.include_router(auth.router,          prefix="/v1", tags=["Auth"])
+app.include_router(merchants.router,     prefix="/v1/merchants", tags=["Merchants"])
 app.include_router(customers.router,     prefix="/v1", tags=["Customers"])
 app.include_router(plans.router,         prefix="/v1", tags=["Plans"])
 app.include_router(subscriptions.router, prefix="/v1", tags=["Subscriptions"])
 
-# No /v1 prefix — Paystack calls this URL directly and we don't want to
-# expose the webhook path structure in the prefix
+# No /v1 prefix — Paystack calls this URL directly
 app.include_router(webhooks.router, tags=["Webhooks"])
+

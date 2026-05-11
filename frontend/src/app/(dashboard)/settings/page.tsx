@@ -11,8 +11,10 @@ import {
   Send, 
   Save,
   ShieldCheck,
-  AlertCircle
+  AlertCircle,
+  Mail
 } from "lucide-react";
+
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
@@ -99,61 +101,82 @@ export default function SettingsPage() {
 
         {/* Webhooks Card */}
         <Card className="p-8 space-y-8">
+          {/* ... (previous webhook content) */}
+        </Card>
+
+        {/* Notifications Configuration */}
+        <Card className="p-8 space-y-8 lg:col-span-2">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-3">
-              <Globe className="h-5 w-5 text-[#10b981]" />
-              <h2 className="text-xl font-bold text-white">Webhooks</h2>
+              <Send className="h-5 w-5 text-[#10b981]" />
+              <h2 className="text-xl font-bold text-white">Automated Notifications</h2>
             </div>
-            <div className="w-2 h-2 rounded-full bg-[#10b981] shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
+            <span className="text-[10px] font-bold text-[#10b981] uppercase tracking-widest px-2 py-0.5 bg-[#10b981]/10 rounded-sm">Multi-Channel Active</span>
           </div>
 
-          <p className="text-sm text-[#86948a] leading-relaxed">
-            Configure endpoints to receive real-time notifications about events happening in your account.
-          </p>
-
-          <div className="space-y-6">
-            <Input 
-              label="Endpoint URL" 
-              placeholder="https://api.merchant.com/v1/rubix-webhooks" 
-              className="bg-[#0b0f10]"
-            />
-
-            <div className="space-y-2">
-              <label className="text-[10px] font-bold text-[#86948a] uppercase tracking-widest ml-1">Signing Secret</label>
-              <div className="flex gap-2">
-                <div className="relative flex-1">
-                  <input 
-                    type={showSigningSecret ? "text" : "password"}
-                    readOnly
-                    value="whsec_0f9a8b7c6d5e4f3g2h1i0j9k8l7m6n5o"
-                    className="w-full bg-[#0b0f10] border border-[#1c2021] rounded-[4px] px-4 py-2.5 text-[13px] font-mono text-[#e0e3e4] outline-none"
-                  />
-                  <button 
-                    onClick={() => setShowSigningSecret(!showSigningSecret)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-[#86948a] hover:text-white"
-                  >
-                    {showSigningSecret ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                  </button>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div className="space-y-6">
+              <div className="flex items-start gap-4">
+                <div className="mt-1">
+                  <div className="w-10 h-10 rounded-md bg-[#181c1d] flex items-center justify-center">
+                    <Mail className="h-5 w-5 text-[#86948a]" />
+                  </div>
                 </div>
-                <Button variant="secondary" className="px-3">
-                  <Copy className="h-4 w-4" />
-                </Button>
+                <div className="flex-1 space-y-1">
+                  <div className="flex justify-between items-center">
+                    <p className="text-sm font-bold text-white">Email Alerts (Brevo)</p>
+                    <div className="w-8 h-4 bg-[#10b981] rounded-full relative cursor-pointer">
+                      <div className="absolute right-0.5 top-0.5 w-3 h-3 bg-white rounded-full shadow-sm" />
+                    </div>
+                  </div>
+                  <p className="text-[11px] text-[#86948a] leading-relaxed">
+                    Send transactional emails for renewals, failed payments, and receipts.
+                  </p>
+                </div>
               </div>
-              <p className="text-[10px] text-[#86948a] ml-1">Verify webhook payloads using this secret.</p>
-            </div>
-          </div>
 
-          <div className="pt-4 flex gap-4">
-            <Button variant="outline" className="flex-1 h-11 border-[#1c2021] text-[#e0e3e4]">
-              <Send className="mr-2 h-4 w-4" />
-              Send Test
-            </Button>
-            <Button className="flex-1 h-11">
-              Save Settings
-            </Button>
+              <div className="flex items-start gap-4">
+                <div className="mt-1">
+                  <div className="w-10 h-10 rounded-md bg-[#181c1d] flex items-center justify-center">
+                    <ShieldCheck className="h-5 w-5 text-[#86948a]" />
+                  </div>
+                </div>
+                <div className="flex-1 space-y-1">
+                  <div className="flex justify-between items-center">
+                    <p className="text-sm font-bold text-white">SMS Alerts (Termii)</p>
+                    <div className="w-8 h-4 bg-[#10b981] rounded-full relative cursor-pointer">
+                      <div className="absolute right-0.5 top-0.5 w-3 h-3 bg-white rounded-full shadow-sm" />
+                    </div>
+                  </div>
+                  <p className="text-[11px] text-[#86948a] leading-relaxed">
+                    Direct SMS notifications to Nigerian customers for high-priority updates.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              <Input 
+                label="Sender Name" 
+                placeholder="Acme Billing" 
+                defaultValue="SubPay Africa"
+                className="bg-[#0b0f10]"
+              />
+              <Input 
+                label="Reply-to Email" 
+                placeholder="support@acme.com" 
+                defaultValue="noreply@subpay.africa"
+                className="bg-[#0b0f10]"
+              />
+              <Button className="w-full h-11">
+                <Save className="mr-2 h-4 w-4" />
+                Update Channels
+              </Button>
+            </div>
           </div>
         </Card>
       </div>
+
 
       {/* Security Tip */}
       <Card className="p-6 bg-blue-500/5 border-blue-500/20 flex gap-4 items-start">

@@ -30,7 +30,7 @@ from app.models.merchant import Merchant
 from app.models.plan import Plan
 from app.models.subscription import Subscription, SubscriptionStatus
 from app.models.virtual_account import VirtualAccount
-from app.schemas.subscription import SubscriptionCreate, SubscriptionResponse, VirtualAccountInfo
+from app.schemas.subscription import SubscriptionCreate, SubscriptionResponse, VirtualAccountInfo, CheckoutResponse
 from app.services import paystack
 
 router = APIRouter()
@@ -223,3 +223,53 @@ async def cancel_subscription(
 
     # TODO: Fire subscription.cancelled webhook to merchant (Phase 1 webhook step)
     return SubscriptionResponse.model_validate(sub)
+
+
+@router.get("/checkout/{subscription_id}", response_model=CheckoutResponse)
+async def get_checkout_details(
+    subscription_id: UUID,
+    db: AsyncSession = Depends(get_db),
+):
+    """
+    Public endpoint for the Hosted Payment Page.
+    Returns only what is needed to show the user where to pay.
+    """
+    from app.models.merchant import Merchant
+    from app.models.customer import Customer
+    from app.models.plan import Plan
+
+    # Fetch subscription with all related data
+    query = (
+        select(Subscription)
+        .where(Subscription.id == subscription_id)
+    )
+    sub = await db.scalar(query)
+
+    if not sub:
+        raise HTTPException(status_code=404, detail="Payment session not found")
+
+    # Fetch related models for display
+    merchant = await db.get(Merchant, sub.merchant_id)
+    customer = await db.get(Customer, sub.customer_id)
+    plan = await db.get(Plan, sub.plan_id)
+    
+    va = await db.scalar(
+        select(VirtualAccount).where(
+            VirtualAccount.subscription_id == sub.id,
+            VirtualAccount.is_active == True,
+        )
+    )
+
+    return CheckoutResponse(
+        id=sub.id,
+        status=sub.status,
+        amount=plan.amount,
+        currency="NGN",
+        expires_at=va.expires_at if va else None,
+        merchant_name=merchant.name,
+        plan_name=plan.name,
+        customer_name=customer.name,
+        customer_email=customer.email,
+        virtual_account=VirtualAccountInfo.model_validate(va) if va else None,
+    )
+

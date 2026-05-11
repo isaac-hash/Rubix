@@ -178,9 +178,25 @@ export default function SubscriptionsPage() {
                       {new Date(sub.created_at).toLocaleDateString()}
                     </td>
                     <td className="p-4 text-right">
-                      <button className="p-1 text-[#86948a] hover:text-white">
-                        <MoreVertical className="h-4 w-4" />
-                      </button>
+                      <div className="flex items-center justify-end gap-2">
+                        {sub.status === "pending_payment" && (
+                          <button 
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              const url = `${window.location.origin}/pay/${sub.id}`;
+                              navigator.clipboard.writeText(url);
+                              alert("Checkout link copied!");
+                            }}
+                            className="p-1.5 text-[#10b981] hover:bg-[#10b981]/10 rounded-[4px] transition-all group/link"
+                            title="Copy Checkout Link"
+                          >
+                            <ExternalLink className="h-4 w-4" />
+                          </button>
+                        )}
+                        <button className="p-1 text-[#86948a] hover:text-white">
+                          <MoreVertical className="h-4 w-4" />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))

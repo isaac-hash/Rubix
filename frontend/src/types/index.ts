@@ -36,8 +36,10 @@ export interface Subscription {
 }
 
 export interface Stats {
-  total_revenue: number;
+  mrr: number;
   active_subscriptions: number;
-  total_customers: number;
-  failed_webhooks: number;
+  success_rate: number;
+  growth_data: { day: string; value: number }[];
+  currency: string;
 }
+

@@ -44,3 +44,23 @@ class SubscriptionResponse(BaseModel):
     virtual_account: VirtualAccountInfo | None = None
 
     model_config = {"from_attributes": True}
+
+
+class CheckoutResponse(BaseModel):
+    id: UUID
+    status: SubscriptionStatus
+    amount: int
+    currency: str = "NGN"
+    expires_at: datetime | None
+    
+    # Branded details
+    merchant_name: str
+    plan_name: str
+    customer_name: str
+    customer_email: str
+    
+    # Payment details
+    virtual_account: VirtualAccountInfo | None = None
+
+    model_config = {"from_attributes": True}
+

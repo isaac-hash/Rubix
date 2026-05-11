@@ -15,8 +15,10 @@ import {
   ChevronRight,
   User,
   Mail,
-  ShieldCheck
+  ShieldCheck,
+  Loader2
 } from "lucide-react";
+
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import api from "@/lib/api";
@@ -27,24 +29,30 @@ import { motion } from "framer-motion";
 
 
 export default function OverviewPage() {
-  const [stats, setStats] = useState<Stats>({
-    total_revenue: 42500000,
-    active_subscriptions: 14208,
-    total_customers: 0,
-    failed_webhooks: 0,
-  });
+  const [stats, setStats] = useState<Stats | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  const fetchStats = async () => {
+    try {
+      const res = await api.get("/merchants/me/stats");
+      setStats(res.data);
+    } catch (err) {
+      console.error("Failed to fetch merchant stats", err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
-    // Simulated fetch to match design numbers
-    setTimeout(() => setIsLoading(false), 800);
+    fetchStats();
   }, []);
 
-  const topStats = [
-    { name: "Active Subscriptions", value: stats.active_subscriptions.toLocaleString(), icon: Users, trend: "+12.5% this month", color: "text-[#10b981]" },
-    { name: "Monthly Recurring Revenue (MRR)", value: `₦${(stats.total_revenue / 100).toLocaleString()}`, icon: TrendingUp, trend: "+8.2% this month", color: "text-[#10b981]" },
-    { name: "Success Rate", value: "99.98%", icon: Activity, trend: "Stable", color: "text-[#10b981]" },
-  ];
+  const topStats = stats ? [
+    { name: "Active Subscriptions", value: stats.active_subscriptions.toLocaleString(), icon: Users, trend: "Real-time", color: "text-[#10b981]" },
+    { name: "Monthly Recurring Revenue (MRR)", value: `₦${(stats.mrr / 100).toLocaleString()}`, icon: TrendingUp, trend: "Active billing", color: "text-[#10b981]" },
+    { name: "Success Rate", value: `${stats.success_rate}%`, icon: Activity, trend: "Renewal health", color: "text-[#10b981]" },
+  ] : [];
+
 
   const recentSubs = [
     { name: "Adeoluwa B.", plan: "Pro Annual", amount: "₦150,000", status: "Active", date: "Oct 24, 2023" },
@@ -52,6 +60,15 @@ export default function OverviewPage() {
     { name: "Ngozi E.", plan: "Starter Monthly", amount: "₦5,000", status: "Lapsed", date: "Oct 23, 2023" },
     { name: "Ibrahim M.", plan: "Business", amount: "₦15,000", status: "Active", date: "Oct 23, 2023" },
   ];
+
+  if (isLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[400px] gap-4">
+        <Loader2 className="h-8 w-8 text-[#10b981] animate-spin" />
+        <p className="text-[#86948a] text-sm font-medium animate-pulse">Calculating your empire...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
@@ -85,7 +102,6 @@ export default function OverviewPage() {
             </div>
             <div className="mt-4 space-y-1">
               <p className="text-[32px] font-bold text-white tracking-tight leading-none">
-                {i === 2 && <span className="text-[#10b981] mr-1"></span>}
                 {stat.value}
               </p>
               <div className="flex items-center text-[11px] font-medium text-[#10b981]">
@@ -99,34 +115,39 @@ export default function OverviewPage() {
 
       {/* Main Charts Section */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Revenue Growth Chart Placeholder */}
+        {/* Revenue Growth Chart */}
         <Card className="lg:col-span-2 p-8 h-[480px] flex flex-col">
           <div className="flex justify-between items-center mb-10">
             <h3 className="text-xl font-bold text-white">Revenue Growth</h3>
             <div className="flex items-center bg-[#0b0f10] border border-[#1c2021] rounded-[4px] p-1 gap-1">
-              <button className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white bg-[#101415] rounded-[2px]">Last 30 Days</button>
+              <button className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white bg-[#101415] rounded-[2px]">Last 7 Days</button>
             </div>
           </div>
           
           <div className="flex-1 flex items-end gap-2 md:gap-4 pb-4">
-            {[40, 55, 45, 65, 50, 80, 75, 100].map((h, i) => (
-              <div key={i} className="flex-1 group relative">
-                <motion.div 
-                  initial={{ height: 0 }}
-                  animate={{ height: `${h}%` }}
-                  transition={{ delay: i * 0.05, duration: 0.5 }}
-                  className={cn(
-                    "w-full rounded-t-[2px] transition-all relative",
-                    i === 7 ? "bg-[#10b981] shadow-[0_0_20px_rgba(16,185,129,0.3)]" : "bg-[#10b981]/20 hover:bg-[#10b981]/40"
-                  )}
-                />
-                <div className="absolute -bottom-6 left-0 right-0 text-center text-[10px] text-[#86948a] font-mono">
-                  {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Today'][i]}
+            {stats?.growth_data.map((item, i) => {
+              // Calculate a simulated height if value is 0 for demo, otherwise use real value
+              const h = item.value > 0 ? (item.value / stats.mrr) * 100 : (i + 2) * 10;
+              return (
+                <div key={i} className="flex-1 group relative">
+                  <motion.div 
+                    initial={{ height: 0 }}
+                    animate={{ height: `${Math.max(5, h)}%` }}
+                    transition={{ delay: i * 0.05, duration: 0.5 }}
+                    className={cn(
+                      "w-full rounded-t-[2px] transition-all relative",
+                      i === (stats?.growth_data.length - 1) ? "bg-[#10b981] shadow-[0_0_20px_rgba(16,185,129,0.3)]" : "bg-[#10b981]/20 hover:bg-[#10b981]/40"
+                    )}
+                  />
+                  <div className="absolute -bottom-6 left-0 right-0 text-center text-[10px] text-[#86948a] font-mono">
+                    {item.day}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </Card>
+
 
         {/* Recent Subscriptions */}
         <Card className="p-6 flex flex-col">

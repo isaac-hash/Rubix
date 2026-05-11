@@ -28,16 +28,22 @@ class Settings(BaseSettings):
     PAYSTACK_WEBHOOK_SECRET: str = ""      # Used to verify inbound webhook signatures
 
     # ── Notifications ────────────────────────────────────────────────────────
-    RESEND_API_KEY: str = ""               # Transactional email
+    BREVO_API_KEY: str = ""                # Transactional email (Brevo)
+    BREVO_SENDER_EMAIL: str = "noreply@subpay.africa"
+    BREVO_SENDER_NAME: str = "SubPay Africa"
+    
     TERMII_API_KEY: str = ""               # SMS (Nigerian DND-compliant)
+    TERMII_SENDER_ID: str = "SubPay"       # Pre-approved Termii Sender ID
+    
     TWILIO_ACCOUNT_SID: str = ""           # WhatsApp via Twilio
     TWILIO_AUTH_TOKEN: str = ""
     WHATSAPP_FROM: str = ""                # e.g. "whatsapp:+234xxxxxxxxxx"
-
     model_config = SettingsConfigDict(
         env_file=".env",
-        env_file_encoding="utf-8"
+        env_file_encoding="utf-8",
+        extra="ignore"
     )
+
 
 
 # Single shared instance — import this everywhere
