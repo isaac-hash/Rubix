@@ -92,3 +92,16 @@ async def get_customer(
         )
 
     return CustomerResponse.model_validate(customer)
+
+
+@router.get("/customers", response_model=list[CustomerResponse])
+async def list_customers(
+    merchant: Merchant = Depends(get_current_merchant),
+    db: AsyncSession = Depends(get_db),
+):
+    """List all customers belonging to this merchant."""
+    result = await db.execute(
+        select(Customer).where(Customer.merchant_id == merchant.id)
+    )
+    return [CustomerResponse.model_validate(c) for c in result.scalars().all()]
+
